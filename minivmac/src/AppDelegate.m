@@ -1,0 +1,85 @@
+#import "AppDelegate.h"
+#import "MainView.h"
+#import "EmulationManager.h"
+
+@interface UIWindow (Additions)
+- (void)makeKey:(id)arg1;
+- (void)orderFront:(id)arg1;
+- (void)setContentView:(id)arg1;
+@end
+
+@interface AppDelegate ()
+@end
+
+IMPORTFUNC blnr InitEmulation(void);
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+    [self setInitOk:[[EmulationManager sharedManager] initEmulation]];
+    [self initPreferences];
+    [self setWindow:[[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)]];
+    [self setMainView:[[MainView alloc] initWithFrame:[[kAppDelegate window] frame]]];
+
+    [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -128, 128)];
+    [_window setContentView:_mainView];
+    [_window makeKeyAndVisible];
+    
+    if (_initOk) {
+        [[EmulationManager sharedManager] startEmulation:self];
+    }
+    
+    return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [[EmulationManager sharedManager] suspendEmulation];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[EmulationManager sharedManager] resumeEmulation];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[EmulationManager sharedManager] suspendEmulation];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)initPreferences
+{    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+     @"KeyboardLayout": @"US",
+     @"ScreenSizeToFit": [NSNumber numberWithBool:YES],
+     @"KeyboardAlpha": [NSNumber numberWithFloat:0.8],
+     @"ScreenPosition": [NSNumber numberWithInt:dirUp | dirLeft],
+     @"Sound Enabled": [NSNumber numberWithBool:YES],
+     @"DiskEjectSound": [NSNumber numberWithBool:YES],
+     @"TrackpadMode": [NSNumber numberWithBool:NO],
+     @"KeyboardSound": [NSNumber numberWithBool:YES],
+     @"CanDeleteDiskImages": [NSNumber numberWithBool:YES]}];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangePreferences:) name:NSUserDefaultsDidChangeNotification object:nil];
+}
+
+- (void)didChangePreferences:(NSNotification *)aNotification
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"SoundEnabled"]) {
+        MySound_Start();
+    }
+    else {
+        MySound_Stop();
+    }
+}
+
+@end
