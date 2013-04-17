@@ -38,7 +38,7 @@
 #endif
 
 #include "SONYEMDV.h"
-#include "../../Glue.h"
+
 
 GLOBALVAR ui5b vSonyMountedMask = 0;
 
@@ -1058,7 +1058,7 @@ LOCALFUNC tMacErr Sony_Prime(CPTR p)
 			*/
 			ReportAbnormal("read verify mode requested");
 #endif
-//			PosMode &= ~ 64;
+			PosMode &= ~ 64;
 		}
 
 #if 0

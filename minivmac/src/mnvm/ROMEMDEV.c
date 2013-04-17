@@ -211,6 +211,7 @@ LOCALPROC Sony_Install(void)
 
 	my_disk_icon_addr = (pto - (ui3p)ROM) + kROM_Base;
 	MyMoveBytes((anyp)my_disk_icon, (anyp)pto, sizeof(my_disk_icon));
+	pto += sizeof(my_disk_icon);
 
 #if UseLargeScreenHack
 	{

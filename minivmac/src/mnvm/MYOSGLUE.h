@@ -52,7 +52,7 @@ EXPORTPROC ReserveAllocOneBlock(ui3p *p, uimr n, ui3r align,
                                 blnr FillOnes);
 
 EXPORTPROC MyMoveBytes(anyp srcPtr, anyp destPtr, si5b byteCount);
-GLOBALPROC Keyboard_UpdateKeyMap3(int key, blnr down);
+
 
 EXPORTVAR(ui3p, ROM)
 //EXPORTVAR(ui3p, *ROM)

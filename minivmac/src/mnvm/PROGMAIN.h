@@ -25,4 +25,3 @@ EXPORTPROC EmulationReserveAlloc(void);
 EXPORTFUNC blnr InitEmulation(void);
 EXPORTPROC DoEmulateOneTick(void);
 EXPORTPROC DoEmulateExtraTime(void);
-GLOBALPROC DoEmulateOneTick(void);
