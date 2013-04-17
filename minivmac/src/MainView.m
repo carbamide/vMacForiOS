@@ -298,7 +298,6 @@
     _lastMouseTime = mouseTime;
     _lastMouseLoc = loc;
 }
-
 - (Point)mouseLocForCGPoint:(CGPoint)point
 {
     Point pt;

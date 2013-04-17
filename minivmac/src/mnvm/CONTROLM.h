@@ -49,7 +49,7 @@ LOCALVAR blnr NeedWholeScreenDraw = falseblnr;
 
 #define MacMsgDisplayed SpecialModeTst(SpclModeMessage)
 
-LOCALVAR ui3p CntrlDisplayBuff = nullpr;
+//LOCALVAR ui3p CntrlDisplayBuff = nullpr;
 
 //LOCALPROC DrawCell(unsigned int h, unsigned int v, int x)
 //{
@@ -152,8 +152,8 @@ LOCALVAR ui3p CntrlDisplayBuff = nullpr;
 #define hStart (ControlBoxh0 + 1)
 
 
-LOCALVAR int CurCellh0;
-LOCALVAR int CurCellv0;
+//LOCALVAR int CurCellh0;
+//LOCALVAR int CurCellv0;
 
 //LOCALPROC DrawCellsBeginLine(void)
 //{

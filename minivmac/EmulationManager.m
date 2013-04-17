@@ -9,6 +9,7 @@
 #import "EmulationManager.h"
 #import "Constants.h"
 #import "VirtualDiskDriveController.h"
+#import "MYOSGLUE.h"
 
 @interface EmulationManager ()
 @property (strong, nonatomic) NSData *romData;

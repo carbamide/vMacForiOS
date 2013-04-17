@@ -14,7 +14,6 @@
 #define MyAppIsBundle 1
 #define kMacCreatorSig 'MnvM'
 
-#define RomFileName "MacIIx.ROM"
 #define EnableDragDrop 1
 #define EnableAltKeysMode 0
 #define SwapCommandControl 0

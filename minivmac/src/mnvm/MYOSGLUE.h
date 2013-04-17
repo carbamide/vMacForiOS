@@ -496,6 +496,7 @@ EXPORTFUNC si4b vSonyRead(void *Buffer, ui4b Drive_No, ui5b Sony_Start, ui5b *So
 EXPORTFUNC si4b vSonyWrite(void *Buffer, ui4b Drive_No, ui5b Sony_Start, ui5b *Sony_Count);
 EXPORTFUNC si4b vSonyEject(ui4b Drive_No);
 EXPORTFUNC si4b vSonyGetSize(ui4b Drive_No, ui5b *Sony_Count);
+GLOBALPROC Keyboard_UpdateKeyMap3(int key, blnr down);
 
 EXPORTFUNC blnr AnyDiskInserted(void);
 

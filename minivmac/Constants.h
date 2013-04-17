@@ -78,13 +78,19 @@ void StartUpTimeAdjust(void);
 
 #define InsertDiskViewAnimationDuration 0.3
 
-#define InsertDiskViewFrameHidden       CGRectMake(1024.0, 0.0, 240.0, 768.0)
-#define InsertDiskViewFrameVisible      CGRectMake(1024.0 - 240.0, 0.0, 240.0, 768.0)
+#define InsertDiskViewFrameHidden           (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? \
+CGRectMake(1024.0, 0.0, 240.0, 768.0) : \
+CGRectMake(480.0, 0.0, 240.0, 320.0))
+
+#define InsertDiskViewFrameVisible          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? \
+CGRectMake(1024.0-240.0, 0.0, 240.0, 768.0) : \
+CGRectMake(240.0, 0.0, 240.0, 320.0))
 #define kNavBarHeight 32
 #define kSwipeThresholdHorizontal 100.0
 #define kSwipeThresholdVertical   70.0
-#define SettingsViewAnimationDuration 0.3
+#define SettingsViewAnimationDuration     0.3
 
-#define SettingsViewFrameHidden       CGRectMake(-240.0, 0.0, 240.0, 768.0)
-#define SettingsViewFrameVisible      CGRectMake(0.0, 0.0, 240.0, 768.0)
+#define SettingsViewFrameHidden           (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(-240.0, 0.0, 240.0, 768.0) : CGRectMake(-240.0, 0.0, 240.0, 320.0))
+
+#define SettingsViewFrameVisible          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(0.0, 0.0, 240.0, 768.0) : CGRectMake(0.0, 0.0, 240.0, 320.0))
 #define RomFileName "vMac.ROM"
