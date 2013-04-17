@@ -58,6 +58,8 @@ GLOBALVAR ui4r CLUT_greens[CLUT_size];
 GLOBALVAR ui4r CLUT_blues[CLUT_size];
 #endif
 
+//LOCALVAR blnr RequestMacOff = falseblnr;
+
 GLOBALVAR blnr ForceMacOff = falseblnr;
 
 GLOBALVAR blnr WantMacInterrupt = falseblnr;

@@ -20,7 +20,19 @@ IMPORTFUNC blnr InitEmulation(void);
     [self setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
     [self setInitOk:[[EmulationManager sharedManager] initEmulation]];
     [self initPreferences];
-    [self setWindow:[[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)]];
+    
+    CGRect windowFrame;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES)
+    {
+        windowFrame = CGRectMake(0,0,1024,768);
+    }
+    else
+    {
+        windowFrame = CGRectMake(0,0,480,320);
+    }
+    
+    [self setWindow:[[UIWindow alloc] initWithFrame:windowFrame]];
     [self setMainView:[[MainView alloc] initWithFrame:[[kAppDelegate window] frame]]];
 
     [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -128, 128)];

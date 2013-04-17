@@ -42,24 +42,28 @@
         UISwipeGestureRecognizer *down = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
         UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
         UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
-
+        
         [up setNumberOfTouchesRequired:2];
         [up setDirection:UISwipeGestureRecognizerDirectionUp];
+        [up setCancelsTouchesInView:NO];
         
         [down setNumberOfTouchesRequired:2];
         [down setDirection:UISwipeGestureRecognizerDirectionDown];
+        [down setCancelsTouchesInView:NO];
         
         [left setNumberOfTouchesRequired:2];
         [left setDirection:UISwipeGestureRecognizerDirectionLeft];
+        [left setCancelsTouchesInView:NO];
         
         [right setNumberOfTouchesRequired:2];
         [right setDirection:UISwipeGestureRecognizerDirectionRight];
+        [right setCancelsTouchesInView:NO];
         
         [self addGestureRecognizer:up];
         [self addGestureRecognizer:down];
         [self addGestureRecognizer:left];
         [self addGestureRecognizer:right];
-
+        
     }
     
     return self;
@@ -103,6 +107,24 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if ([[event allTouches] count] > 1) {
+        _mouseTouch = nil;
+        
+        if (_inGesture) {
+            return;
+        }
+        
+        _inGesture = YES;
+        _mouseDrag = NO;
+        
+        [AppDelegate cancelPreviousPerformRequestsWithTarget:[VirtualMouseController sharedInstance] selector:@selector(setMouseButtonDown) object:nil];
+        [[VirtualMouseController sharedInstance] setMouseButtonUp];
+        
+        _gestureStart = CGPointCenter([[[event.allTouches allObjects] objectAtIndex:0] locationInView:self], [[[event.allTouches allObjects] objectAtIndex:1] locationInView:self]);
+        
+        return;
+    }
+    
     _mouseTouch = [touches anyObject];
     
     CGPoint tapLoc = [_mouseTouch locationInView:self];
@@ -281,7 +303,6 @@
     _lastMouseTime = mouseTime;
     _lastMouseLoc = loc;
 }
-
 - (Point)mouseLocForCGPoint:(CGPoint)point
 {
     Point pt;

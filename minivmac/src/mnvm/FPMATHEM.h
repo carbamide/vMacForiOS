@@ -2245,7 +2245,7 @@ LOCALFUNC floatx80 floatx80_div( floatx80 a, floatx80 b )
 
 LOCALFUNC floatx80 floatx80_rem( floatx80 a, floatx80 b )
 {
-	flag aSign, zSign;
+	flag aSign, bSign, zSign;
 	si5r aExp, bExp, expDiff;
 	ui6b aSig0, aSig1, bSig;
 	ui6b q, term0, term1, alternateASig0, alternateASig1;
@@ -2256,6 +2256,7 @@ LOCALFUNC floatx80 floatx80_rem( floatx80 a, floatx80 b )
 	aSign = extractFloatx80Sign( a );
 	bSig = extractFloatx80Frac( b );
 	bExp = extractFloatx80Exp( b );
+	bSign = extractFloatx80Sign( b );
 	if ( aExp == 0x7FFF ) {
 		if (    (ui6b) ( aSig0<<1 )
 			 || ( ( bExp == 0x7FFF ) && (ui6b) ( bSig<<1 ) ) ) {
