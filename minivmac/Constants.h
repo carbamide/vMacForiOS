@@ -44,12 +44,18 @@ void runTick(CFRunLoopTimerRef timer, void *info);
 void StartUpTimeAdjust(void);
 #define kAppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
+#ifdef UI_USER_INTERFACE_IDIOM()
+#define IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#else
+#define IPAD() (false)
+#endif
+
 #define kMacEpoch             2082844800
 #define MyTickDuration        (1 / 60.14742)
 
 //FIXME This is the dumbest thing I've ever seen.
-#define DeviceScreenHeight    1024
-#define DeviceScreenWidth     768
+#define DeviceScreenHeight (IPAD() == YES ? 1024 : 480);
+#define DeviceScreenWidth (IPAD() == YES ? 768: 320);
 
 #define PointDistanceSq(a, b) ((((int)a.h - (int)b.h) * ((int)a.h - (int)b.h)) + (((int)a.v - (int)b.v) * ((int)a.v - (int)b.v)))
 #define CGPointCenter(a, b)   CGPointMake((a.x + b.x) / 2, (a.y + b.y) / 2)
@@ -64,9 +70,13 @@ void StartUpTimeAdjust(void);
 #define MOUSE_LOC_THRESHOLD   500       // pixel distance in mac screen, squared, integer
 #define kScreenEdgeSize       20        // edge size for scrolling
 
-#define kScreenRectFullScreen CGRectMake(0.f, 0.f, 1024.f, 768.f)
+#define kScreenRectFullScreen   (IPAD() == YES ? \
+CGRectMake(0.f, 0.f, 1024.f, 768.f) : \
+CGRectMake(0.f, 0.f, 480.f, 320.f))
 
-#define kScreenRectRealSize   CGRectMake((1024 / 2) - (vMacScreenWidth / 2), (768 / 2) - (vMacScreenHeight / 2), vMacScreenWidth, vMacScreenHeight)
+#define kScreenRectRealSize     (IPAD() == YES ? \
+CGRectMake((1024/2)-(vMacScreenWidth/2), (768/2)-(vMacScreenHeight/2), vMacScreenWidth, vMacScreenHeight) : \
+CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
 
 
 #undef ABS

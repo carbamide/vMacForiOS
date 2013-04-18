@@ -17,7 +17,6 @@ IMPORTFUNC blnr InitEmulation(void);
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
     [self setInitOk:[[EmulationManager sharedManager] initEmulation]];
     [self initPreferences];
     

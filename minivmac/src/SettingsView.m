@@ -1,8 +1,9 @@
 #import "SettingsView.h"
 #import "AppDelegate.h"
 #import "EmulationManager.h"
+#import <QuartzCore/QuartzCore.h>
 
-#define kToolbarHeight 32
+#define kToolbarHeight 44
 #define kNavBarHeight  32
 
 @implementation SettingsView
@@ -27,6 +28,11 @@
         [navItem setLeftBarButtonItem:button animated:NO];
         
         [self addSubview:_navBar];
+        
+        [[self layer] setShadowColor:[[UIColor blackColor] CGColor]];
+		[[self layer] setShadowOffset:CGSizeMake(10, 0)];
+		[[self layer] setShadowRadius:5];
+		[[self layer] setShadowOpacity:0.8];
         
         CGRect tableRect = CGRectMake(0.0, kNavBarHeight, frame.size.width, frame.size.height - kNavBarHeight - kToolbarHeight);
         

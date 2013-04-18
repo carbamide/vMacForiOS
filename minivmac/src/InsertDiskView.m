@@ -1,5 +1,6 @@
 #import "InsertDiskView.h"
 #import "VirtualDiskDriveController.h"
+#import "MainView.h"
 
 @implementation InsertDiskView
 
@@ -35,6 +36,11 @@
         [_navBar pushNavigationItem:navItem animated:NO];
         
         [self addSubview:_navBar];
+        
+		[[self layer] setShadowColor:[[UIColor blackColor] CGColor]];
+		[[self layer] setShadowOffset:CGSizeMake(-10, 0)];
+		[[self layer] setShadowRadius:5];
+		[[self layer] setShadowOpacity:0.8];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didInsertDisk:) name:@"diskInserted" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEjectDisk:) name:@"diskEjected" object:nil];
@@ -155,14 +161,8 @@
     NSString *diskPath = _diskFiles[[indexPath row]];
     
     [[cell imageView] setImage:[self iconForDiskImageAtPath:diskPath]];
-    [[cell textLabel] setText:[[diskPath lastPathComponent] stringByDeletingPathExtension]];
-    
-    if ([_diskDrive diskIsInserted:_diskFiles[[indexPath row]]]) {
-        [[cell textLabel] setTextColor:[UIColor grayColor]];
-    }
-    else {
-        [[cell textLabel] setTextColor:[UIColor blackColor]];
-    }
+    [[cell textLabel] setText:[diskPath lastPathComponent]];
+    [[cell textLabel] setTextColor:[UIColor blackColor]];
     
     return cell;
 }
@@ -204,39 +204,41 @@
     UITableViewCell *tempCell = [tableView cellForRowAtIndexPath:indexPath];
     
     @try {
-        UIActionSheet *selectedActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Mount", @"Mount on Startup", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Select a disk action" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                
+        NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [selectedActionSheet showFromRect:[tempCell frame] inView:[kAppDelegate window] animated:YES];
+        if (![_diskDrive diskIsInserted:_diskFiles[[indexPath row]]]) {
+            [alertView addButtonWithTitle:@"Mount"];
+        }
+        
+        BOOL addRemoveAutoMountButton = NO;
+        
+        if ([tempArray count] > 0) {
+            for (NSString *tempString in tempArray) {
+                if ([tempString isEqualToString:[[tempCell textLabel] text]]) {
+                    addRemoveAutoMountButton = YES;
+                }
+            }
+        }
+        
+        if (addRemoveAutoMountButton) {
+            [alertView addButtonWithTitle:@"Don't Automount"];
         }
         else {
-            [selectedActionSheet showInView:[self table]];
+            [alertView addButtonWithTitle:@"Automount"];
         }
         
-
+        [alertView show];
     }
     @catch (NSException *e) {
         NSLog(@"An exception has occured in InsertDiskView while selecting the row");
     }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    @try {
-        id diskFile = _diskFiles[[indexPath row]];
-        
-        if ([_diskDrive diskIsInserted:diskFile]) return nil;
-        
-        return indexPath;
-    }
-    @catch (NSException *e) {
-        NSLog(@"An exception has occured in InsertDiskView when a row was about to enter the selected state");
-    }
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
     
     if ([buttonTitle isEqualToString:@"Mount"]) {
         id diskFile = _diskFiles[[[[self table] indexPathForSelectedRow] row]];
@@ -249,9 +251,50 @@
         
         [self hide];
     }
-    else if ([buttonTitle isEqualToString:@"Mount on Startup"]) {
+    else if ([buttonTitle isEqualToString:@"Automount"]) {
+        UITableViewCell *tempCell = [[self table] cellForRowAtIndexPath:[[self table] indexPathForSelectedRow]];
         
+        if ([[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"]) {
+            NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
+            
+            [tempArray addObject:[[tempCell textLabel] text]];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
+        }
+        else {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            
+            [tempArray addObject:[[tempCell textLabel] text]];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
+        }
+        
+        id diskFile = _diskFiles[[[[self table] indexPathForSelectedRow] row]];
+
+        if (![_diskDrive diskIsInserted:diskFile]) {
+            [_diskDrive insertDisk:diskFile];
+        }
     }
+    else if ([buttonTitle isEqualToString:@"Don't Automount"]) {
+        UITableViewCell *tempCell = [[self table] cellForRowAtIndexPath:[[self table] indexPathForSelectedRow]];
+
+        NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
+        
+        [tempArray removeObject:[[tempCell textLabel] text]];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
+    }
+
+    [self hide];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if (interfaceOrientation == (UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight)) {
+        return YES;
+    }
+    return NO;
+}
 @end
