@@ -44,11 +44,7 @@ void runTick(CFRunLoopTimerRef timer, void *info);
 void StartUpTimeAdjust(void);
 #define kAppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
-#ifdef UI_USER_INTERFACE_IDIOM()
 #define IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#else
-#define IPAD() (false)
-#endif
 
 #define kMacEpoch             2082844800
 #define MyTickDuration        (1 / 60.14742)
