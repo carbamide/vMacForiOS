@@ -201,7 +201,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *tempCell = [tableView cellForRowAtIndexPath:indexPath];
+    
     @try {
+        UIActionSheet *selectedActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Mount", @"Mount on Startup", nil];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [selectedActionSheet showFromRect:[tempCell frame] inView:[self table] animated:YES];
+        }
+        else {
+            [selectedActionSheet showInView:[self table]];
+        }
+        
         id diskFile = _diskFiles[[indexPath row]];
         
         if ([_diskDrive diskIsInserted:diskFile]) {
@@ -229,6 +240,11 @@
     @catch (NSException *e) {
         NSLog(@"An exception has occured in InsertDiskView when a row was about to enter the selected state");
     }
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 @end

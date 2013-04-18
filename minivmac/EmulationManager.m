@@ -126,7 +126,7 @@ IMPORTFUNC blnr InitEmulation(void);
     NSFileManager *mng = [NSFileManager defaultManager];
     
     for (int i = 1; i <= NumDrives; i++) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"disk%d", i] ofType:@"dsk"];
+        NSString *path = [[[Helpers sharedInstance] documentsPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"disk%d.dsk", i]];
         
         if ([mng fileExistsAtPath:path]) {
             [[VirtualDiskDriveController sharedInstance] insertDisk:path];

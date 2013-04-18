@@ -5,7 +5,7 @@
 #import "Constants.h"
 #import "VirtualDiskDrive.h"
 
-@interface InsertDiskView : UIView <UITableViewDelegate, UITableViewDataSource>
+@interface InsertDiskView : UIView <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSArray *diskFiles;
 @property (strong, nonatomic) UITableView *table;
