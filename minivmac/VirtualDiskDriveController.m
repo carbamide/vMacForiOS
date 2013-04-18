@@ -68,7 +68,9 @@ GLOBALFUNC blnr getFirstFreeDisk(ui4b *Drive_No);
 - (BOOL)diskIsInserted:(NSString *)path
 {
     for (int i = 0; i < NumDrives; i++) {
-        if ([drivePath[i] isEqualToString:path]) return YES;
+        if ([drivePath[i] isEqualToString:path]) {
+            return YES;
+        }
     }
     
     return NO;

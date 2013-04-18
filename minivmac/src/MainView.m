@@ -45,15 +45,19 @@
         
         [up setNumberOfTouchesRequired:2];
         [up setDirection:UISwipeGestureRecognizerDirectionUp];
+        [up setCancelsTouchesInView:NO];
         
         [down setNumberOfTouchesRequired:2];
         [down setDirection:UISwipeGestureRecognizerDirectionDown];
+        [down setCancelsTouchesInView:NO];
         
         [left setNumberOfTouchesRequired:2];
         [left setDirection:UISwipeGestureRecognizerDirectionLeft];
+        [left setCancelsTouchesInView:NO];
         
         [right setNumberOfTouchesRequired:2];
         [right setDirection:UISwipeGestureRecognizerDirectionRight];
+        [right setCancelsTouchesInView:NO];
         
         [self addGestureRecognizer:up];
         [self addGestureRecognizer:down];
@@ -104,19 +108,20 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if ([[event allTouches] count] > 1) {
-        // gesture started
         _mouseTouch = nil;
-        if (_inGesture) return;
+        
+        if (_inGesture) {
+            return;
+        }
+        
         _inGesture = YES;
         _mouseDrag = NO;
         
         [AppDelegate cancelPreviousPerformRequestsWithTarget:[VirtualMouseController sharedInstance] selector:@selector(setMouseButtonDown) object:nil];
         [[VirtualMouseController sharedInstance] setMouseButtonUp];
         
-        // start point
-        _gestureStart = CGPointCenter(
-                                      [[[event.allTouches allObjects] objectAtIndex:0] locationInView:self],
-                                      [[[event.allTouches allObjects] objectAtIndex:1] locationInView:self]);
+        _gestureStart = CGPointCenter([[[event.allTouches allObjects] objectAtIndex:0] locationInView:self], [[[event.allTouches allObjects] objectAtIndex:1] locationInView:self]);
+        
         return;
     }
     
