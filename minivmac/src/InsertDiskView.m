@@ -207,21 +207,13 @@
         UIActionSheet *selectedActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Mount", @"Mount on Startup", nil];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [selectedActionSheet showFromRect:[tempCell frame] inView:[self table] animated:YES];
+            [selectedActionSheet showFromRect:[tempCell frame] inView:[kAppDelegate window] animated:YES];
         }
         else {
             [selectedActionSheet showInView:[self table]];
         }
         
-        id diskFile = _diskFiles[[indexPath row]];
-        
-        if ([_diskDrive diskIsInserted:diskFile]) {
-            return;
-        }
-        
-        [_diskDrive insertDisk:diskFile];
-        
-        [self hide];
+
     }
     @catch (NSException *e) {
         NSLog(@"An exception has occured in InsertDiskView while selecting the row");
@@ -244,7 +236,22 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
+    if ([buttonTitle isEqualToString:@"Mount"]) {
+        id diskFile = _diskFiles[[[[self table] indexPathForSelectedRow] row]];
+        
+        if ([_diskDrive diskIsInserted:diskFile]) {
+            return;
+        }
+        
+        [_diskDrive insertDisk:diskFile];
+        
+        [self hide];
+    }
+    else if ([buttonTitle isEqualToString:@"Mount on Startup"]) {
+        
+    }
 }
 
 @end
