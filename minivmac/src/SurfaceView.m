@@ -233,8 +233,4 @@ static unsigned char colorTable[] = { 0, 0, 0, 255, 255, 255, 0 };
     return frame;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-}
 @end
