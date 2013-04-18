@@ -92,9 +92,7 @@ GLOBALFUNC blnr getFirstFreeDisk(ui4b *Drive_No);
 }
 
 - (BOOL)insertDisk:(NSString *)path
-{
-    NSLog(@"%@", path);
-    
+{    
     BOOL isDir;
     
     short driveNum;

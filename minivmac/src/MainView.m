@@ -134,20 +134,38 @@
         
         Direction scrollTo = 0;
         
-        if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
-            scrollTo |= dirLeft;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
+                scrollTo |= dirLeft;
+            }
+            
+            if (tapLoc.y < kScreenEdgeSize && screenLoc.y != 0.0) {
+                scrollTo |= dirUp;
+            }
+            
+            if (tapLoc.x > (1024 - kScreenEdgeSize) && screenLoc.x == 0.0) {
+                scrollTo |= dirRight;
+            }
+            
+            if (tapLoc.y > (768 - kScreenEdgeSize) && screenLoc.y == 0.0) {
+                scrollTo |= dirDown;
+            }
         }
-        
-        if (tapLoc.y < kScreenEdgeSize && screenLoc.y != 0.0) {
-            scrollTo |= dirUp;
-        }
-        
-        if (tapLoc.x > (1024 - kScreenEdgeSize) && screenLoc.x == 0.0) {
-            scrollTo |= dirRight;
-        }
-        
-        if (tapLoc.y > (768 - kScreenEdgeSize) && screenLoc.y == 0.0) {
-            scrollTo |= dirDown;
+        else {
+            if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
+                scrollTo |= dirLeft;
+            }
+            
+            if (tapLoc.y < kScreenEdgeSize && screenLoc.y != 0.0) {
+                scrollTo |= dirUp;
+            }
+            
+            if (tapLoc.x > (480-kScreenEdgeSize) && screenLoc.x == 0.0) {
+                scrollTo |= dirRight;
+            }
+            if (tapLoc.y > (320-kScreenEdgeSize) && screenLoc.y == 0.0) {
+                scrollTo |= dirDown;
+            }
         }
         
         
@@ -313,8 +331,14 @@
         pt.v = point.y;
     }
     else if (_screenSizeToFit) {
-        pt.h = point.x * (vMacScreenWidth / 1024.0);
-        pt.v = point.y * (vMacScreenHeight / 768.0);
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            pt.h = point.x * (vMacScreenWidth / 1024.0);
+            pt.v = point.y * (vMacScreenHeight / 768.0);
+        }
+        else {
+            pt.h = point.x * (vMacScreenWidth / 480.0);
+            pt.v = point.y * (vMacScreenHeight / 320.0);
+        }
     }
     else {
         pt.h = point.x - _mouseOffset.h;
