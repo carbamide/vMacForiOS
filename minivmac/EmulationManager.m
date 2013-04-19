@@ -125,22 +125,11 @@ IMPORTFUNC blnr InitEmulation(void);
 {
     NSFileManager *mng = [NSFileManager defaultManager];
     
-    NSArray *diskArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"];
-    
     for (int i = 1; i <= NumDrives; i++) {
         NSString *path = [[[Helpers sharedInstance] documentsPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"disk%d.dsk", i]];
         
         if ([mng fileExistsAtPath:path]) {
-            [[VirtualDiskDriveController sharedInstance] insertDisk:path];
-        }
-    }
-    
-    for (NSString *diskString in diskArray) {
-        NSString *path = [[[Helpers sharedInstance] documentsPath] stringByAppendingPathComponent:diskString];
-
-        if ([mng fileExistsAtPath:path]) {
-            
-            [[VirtualDiskDriveController sharedInstance] insertDisk:path];
+            //[[VirtualDiskDriveController sharedInstance] insertDisk:path];
         }
     }
     

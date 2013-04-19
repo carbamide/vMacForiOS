@@ -198,50 +198,10 @@
         }
     }
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *tempCell = [tableView cellForRowAtIndexPath:indexPath];
-    
+{    
     @try {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Select a disk action" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-                
-        NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
-        
-        if (![_diskDrive diskIsInserted:_diskFiles[[indexPath row]]]) {
-            [alertView addButtonWithTitle:@"Mount"];
-        }
-        
-        BOOL addRemoveAutoMountButton = NO;
-        
-        if ([tempArray count] > 0) {
-            for (NSString *tempString in tempArray) {
-                if ([tempString isEqualToString:[[tempCell textLabel] text]]) {
-                    addRemoveAutoMountButton = YES;
-                }
-            }
-        }
-        
-        if (addRemoveAutoMountButton) {
-            [alertView addButtonWithTitle:@"Don't Automount"];
-        }
-        else {
-            [alertView addButtonWithTitle:@"Automount"];
-        }
-        
-        [alertView show];
-    }
-    @catch (NSException *e) {
-        NSLog(@"An exception has occured in InsertDiskView while selecting the row");
-    }
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if ([buttonTitle isEqualToString:@"Mount"]) {
-        id diskFile = _diskFiles[[[[self table] indexPathForSelectedRow] row]];
+        id diskFile = _diskFiles[[indexPath row]];
         
         if ([_diskDrive diskIsInserted:diskFile]) {
             return;
@@ -251,50 +211,28 @@
         
         [self hide];
     }
-    else if ([buttonTitle isEqualToString:@"Automount"]) {
-        UITableViewCell *tempCell = [[self table] cellForRowAtIndexPath:[[self table] indexPathForSelectedRow]];
-        
-        if ([[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"]) {
-            NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
-            
-            [tempArray addObject:[[tempCell textLabel] text]];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
-        }
-        else {
-            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-            
-            [tempArray addObject:[[tempCell textLabel] text]];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
-        }
-        
-        id diskFile = _diskFiles[[[[self table] indexPathForSelectedRow] row]];
-
-        if (![_diskDrive diskIsInserted:diskFile]) {
-            [_diskDrive insertDisk:diskFile];
-        }
+    @catch (NSException *e) {
+        NSLog(@"An exception has occured in InsertDiskView while selecting the row");
     }
-    else if ([buttonTitle isEqualToString:@"Don't Automount"]) {
-        UITableViewCell *tempCell = [[self table] cellForRowAtIndexPath:[[self table] indexPathForSelectedRow]];
+}
 
-        NSMutableArray *tempArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"disks_to_load"] mutableCopy];
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    @try {
+        id diskFile = _diskFiles[[indexPath row]];
         
-        [tempArray removeObject:[[tempCell textLabel] text]];
+        if ([_diskDrive diskIsInserted:diskFile]) return nil;
         
-        [[NSUserDefaults standardUserDefaults] setObject:tempArray forKey:@"disks_to_load"];
+        return indexPath;
     }
-
-    [self hide];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    @catch (NSException *e) {
+        NSLog(@"An exception has occured in InsertDiskView when a row was about to enter the selected state");
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if (interfaceOrientation == (UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight)) {
-        return YES;
-    }
-    return NO;
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
+
 @end
