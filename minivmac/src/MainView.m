@@ -9,7 +9,13 @@
 - (id)initWithFrame:(CGRect)rect
 {
     if (self = [super initWithFrame:rect]) {
-        [self setBackgroundColor:[UIColor blackColor]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [self setBackgroundColor:[UIColor blackColor]];
+        }
+        else {
+            [self setBackgroundColor:[UIColor underPageBackgroundColor]];
+        }
+        
         [self didChangePreferences:nil];
         [self setMultipleTouchEnabled:YES];
         
@@ -163,7 +169,7 @@
             if (tapLoc.x > (480-kScreenEdgeSize) && screenLoc.x == 0.0) {
                 scrollTo |= dirRight;
             }
-            if (tapLoc.y > (320-kScreenEdgeSize) && screenLoc.y == 0.0) {
+            if (tapLoc.y > (480-kScreenEdgeSize) && screenLoc.y == 0.0) {
                 scrollTo |= dirDown;
             }
         }
@@ -336,7 +342,7 @@
             pt.v = point.y * (vMacScreenHeight / 768.0);
         }
         else {
-            pt.h = point.x * (vMacScreenWidth / 480.0);
+            pt.h = point.x * (vMacScreenWidth / 568);
             pt.v = point.y * (vMacScreenHeight / 320.0);
         }
     }

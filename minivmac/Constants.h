@@ -84,13 +84,10 @@ CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
 
 #define InsertDiskViewAnimationDuration 0.3
 
-#define InsertDiskViewFrameHidden           (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? \
-CGRectMake(1044.0, 0.0, 240.0, 768.0) : \
-CGRectMake(500.0, 0.0, 240.0, 320.0))
+#define InsertDiskViewFrameHidden           (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(1044.0, 0.0, 240.0, 768.0) : CGRectMake(580.0, 0.0, 240.0, 320.0))
 
-#define InsertDiskViewFrameVisible          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? \
-CGRectMake(1044.0-260.0, 0.0, 240.0, 768.0) : \
-CGRectMake(240.0, 0.0, 240.0, 320.0))
+#define InsertDiskViewFrameVisible          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(1044.0-260.0, 0.0, 240.0, 768.0) : CGRectMake(324.0, 0.0, 240.0, 320.0))
+
 #define kNavBarHeight 32
 #define kSwipeThresholdHorizontal 100.0
 #define kSwipeThresholdVertical   70.0

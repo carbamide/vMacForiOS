@@ -23,10 +23,10 @@ IMPORTFUNC blnr InitEmulation(void);
     CGRect windowFrame;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES) {
-        windowFrame = CGRectMake(0,0,1024,768);
+        windowFrame = CGRectMake(0, 0, 1024, 768);
     }
     else {
-        windowFrame = CGRectMake(0,0,480,320);
+        windowFrame = CGRectMake(0, 0, 480, 320);
     }
     
     [self setWindow:[[UIWindow alloc] initWithFrame:windowFrame]];
@@ -35,7 +35,10 @@ IMPORTFUNC blnr InitEmulation(void);
         [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -128, 128)];
     }
     else {
-        [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -80, 80)];
+        //this is a flaming pile of dog crap and a stupid way of doing this.
+        //I think probably a curse word would help, so I'm going to curse.
+        //Fuck.
+        [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -80, 120)];
     }
     
     [self setMainView:[[MainView alloc] initWithFrame:windowFrame]];

@@ -162,7 +162,13 @@
     
     [[cell imageView] setImage:[self iconForDiskImageAtPath:diskPath]];
     [[cell textLabel] setText:[diskPath lastPathComponent]];
-    [[cell textLabel] setTextColor:[UIColor blackColor]];
+    
+    if ([_diskDrive diskIsInserted:_diskFiles[[indexPath row]]]) {
+        [[cell textLabel] setTextColor:[UIColor darkGrayColor]];
+    }
+    else {
+        [[cell textLabel] setTextColor:[UIColor blackColor]];
+    }
     
     return cell;
 }
@@ -199,7 +205,7 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     @try {
         id diskFile = _diskFiles[[indexPath row]];
         
