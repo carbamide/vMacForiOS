@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		291DFE0416DEF05000F03EF5 /* VirtualMouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */; };
 		291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */; };
+		291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 291EC69217233F8300D40B90 /* SVProgressHUD.bundle */; };
+		291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 291EC69417233F8300D40B90 /* SVProgressHUD.m */; };
 		29457D5116D923DE00361282 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 29457D5016D923DE00361282 /* PkgInfo */; };
 		295A8A0616E250180061102B /* EmulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0516E250180061102B /* EmulationManager.m */; };
 		295A8A0A16E253080061102B /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0916E253080061102B /* Helpers.m */; };
@@ -100,6 +102,9 @@
 		291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualMouseController.m; sourceTree = "<group>"; };
 		291DFE0516DEF05D00F03EF5 /* VirtualDiskDriveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDriveController.h; sourceTree = "<group>"; };
 		291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualDiskDriveController.m; sourceTree = "<group>"; };
+		291EC69217233F8300D40B90 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		291EC69317233F8300D40B90 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		291EC69417233F8300D40B90 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		292FF27C16DB1023001FCFBA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		292FF27D16DB103A001FCFBA /* VirtualDiskDrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDrive.h; sourceTree = "<group>"; };
 		292FF27F16DB108B001FCFBA /* VirtualMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualMouse.h; sourceTree = "<group>"; };
@@ -269,6 +274,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291EC69717233F8700D40B90 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				291EC69217233F8300D40B90 /* SVProgressHUD.bundle */,
+				291EC69317233F8300D40B90 /* SVProgressHUD.h */,
+				291EC69417233F8300D40B90 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		292FF27E16DB107E001FCFBA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +308,7 @@
 		292FF28116DB1244001FCFBA /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				291EC69717233F8700D40B90 /* SVProgressHUD */,
 				292FF28316DB1609001FCFBA /* vMac */,
 				292FF28216DB15E3001FCFBA /* Keyboard Craziness */,
 				296C8D7A16D917AE00C79BE8 /* Glue.h */,
@@ -724,6 +740,7 @@
 				29D864161720D3CB00528DD9 /* Default@2x.png in Resources */,
 				29D864181720D3D900528DD9 /* Default.png in Resources */,
 				29D8641A1720D3DF00528DD9 /* Default-568h@2x.png in Resources */,
+				291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +781,7 @@
 				291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */,
 				295A8A0616E250180061102B /* EmulationManager.m in Sources */,
 				295A8A0A16E253080061102B /* Helpers.m in Sources */,
+				291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

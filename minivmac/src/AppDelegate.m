@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 #import "MainView.h"
 #import "EmulationManager.h"
+#import "SVProgressHUD.h"
 
 @interface UIWindow (Additions)
 - (void)makeKey:(id)arg1;
@@ -31,16 +32,14 @@ IMPORTFUNC blnr InitEmulation(void);
     
     [self setWindow:[[UIWindow alloc] initWithFrame:windowFrame]];
     
-    [[self window] setBackgroundColor:[UIColor redColor]];
-    
     if (IPAD()==YES) {
-        [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -128, 128)];
+        [_window setTransform:CGAffineTransformMake(0, -1, 1, 0, -128, 128)];
     }
     else {
         //this is a flaming pile of dog crap and a stupid way of doing this.
         //I think probably a curse word would help, so I'm going to curse.
         //Fuck.
-        [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -80, 120)];
+        [_window setTransform:CGAffineTransformMake(0, -1, 1, 0, -80, 120)];
     }
     
     [self setMainView:[[MainView alloc] initWithFrame:windowFrame]];
@@ -51,6 +50,8 @@ IMPORTFUNC blnr InitEmulation(void);
     if (_initOk) {
         [[EmulationManager sharedManager] startEmulation:self];
     }
+    
+    [SVProgressHUD showWithStatus:@"Loading Emulator..." maskType:SVProgressHUDMaskTypeClear];
     
     return YES;
 }

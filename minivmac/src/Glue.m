@@ -6,6 +6,7 @@
 #import "mnvm/MYOSGLUE.c"
 #import "objc/message.h"
 #import "VirtualDiskDriveController.h"
+#import "SVProgressHUD.h"
 
 blnr SpeedStopped = falseblnr;
 NSInteger numInsertedDisks;
@@ -75,7 +76,9 @@ void updateScreen(ui4r top, ui4r left, ui4r bottom, ui4r right) {
     UpdateLuminanceCopy((anyp *)SurfaceScrnBuf, top, left, bottom, right);
 
     objc_msgSend(_gScreenView, _updateColorMode, UseColorMode);
-
+    
+    [SVProgressHUD dismiss];
+    
     // look at sending a rect - there is likely to be screen corruption under certain scenarios.
     objc_msgSend(_gScreenView, @selector(setNeedsDisplay));
 }
