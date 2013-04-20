@@ -489,7 +489,6 @@
                 [_insertDiskView hide];
             }
         }
-        
     }
 }
 
