@@ -42,6 +42,7 @@ GLOBALPROC MySound_Stop(void);
 GLOBALPROC MySound_BeginPlaying(void);
 void runTick(CFRunLoopTimerRef timer, void *info);
 void StartUpTimeAdjust(void);
+
 #define kAppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 #define IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -66,14 +67,17 @@ void StartUpTimeAdjust(void);
 #define MOUSE_LOC_THRESHOLD   500       // pixel distance in mac screen, squared, integer
 #define kScreenEdgeSize       20        // edge size for scrolling
 
-#define kScreenRectFullScreen   (IPAD() == YES ? \
-CGRectMake(0.f, 0.f, 1024.f, 768.f) : \
-CGRectMake(0.f, 0.f, 480.f, 320.f))
+#define IPAD_INSERT_VIEW_THRESHOLD 784
+#define IPHONE_INSERT_VIEW_THRESHOLD 287
+#define INSERT_VIEW_WIDTH 240
+#define IPAD_INSERT_VIEW_HEIGHT 768
+#define IPHONE_INSERT_VIEW_HEIGHT 320
+#define IPAD_HIDE_THRESHOLD 930
+#define IPHONE_SHOW_THESHOLD 383
+#define NO_VELOCITY 0
 
-#define kScreenRectRealSize     (IPAD() == YES ? \
-CGRectMake((1024/2)-(vMacScreenWidth/2), (768/2)-(vMacScreenHeight/2), vMacScreenWidth, vMacScreenHeight) : \
-CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
-
+#define kScreenRectFullScreen   (IPAD() == YES ? CGRectMake(0.f, 0.f, 1024.f, 768.f) : CGRectMake(0.f, 0.f, 480.f, 320.f))
+#define kScreenRectRealSize     (IPAD() == YES ? CGRectMake((1024/2)-(vMacScreenWidth/2), (768/2)-(vMacScreenHeight/2), vMacScreenWidth, vMacScreenHeight) : CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
 
 #undef ABS
 #define ABS(x)           (((x) > 0) ? (x) : -(x))
@@ -81,12 +85,9 @@ CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
 #undef CLAMP
 #define CLAMP(x, lo, hi) (((x) > (hi)) ? (hi) : (((x) < (lo)) ? (lo) : (x)))
 
-
 #define InsertDiskViewAnimationDuration 0.3
-
-#define InsertDiskViewFrameHidden           (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(1044.0, 0.0, 240.0, 768.0) : CGRectMake(528, 0.0, 240.0, 320.0))
-
-#define InsertDiskViewFrameVisible          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES ? CGRectMake(1044.0-260.0, 0.0, 240.0, 768.0) : CGRectMake(287, 0.0, 240.0, 320.0))
+#define InsertDiskViewFrameHidden           (IPAD() ? CGRectMake(1044.0, 0.0, 240.0, 768.0) : CGRectMake(528, 0.0, 240.0, 320.0))
+#define InsertDiskViewFrameVisible          (IPAD() ? CGRectMake(1044.0-260.0, 0.0, 240.0, 768.0) : CGRectMake(287, 0.0, 240.0, 320.0))
 
 #define kNavBarHeight 32
 #define kSwipeThresholdHorizontal 100.0

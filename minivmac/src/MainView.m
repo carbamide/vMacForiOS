@@ -128,7 +128,7 @@
         
         Direction scrollTo = 0;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (IPAD()) {
             if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
                 scrollTo |= dirLeft;
             }
@@ -321,7 +321,7 @@
         pt.v = point.y;
     }
     else if (_screenSizeToFit) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (IPAD()) {
             pt.h = point.x * (vMacScreenWidth / 1024.0);
             pt.v = point.y * (vMacScreenHeight / 768.0);
         }
@@ -442,17 +442,18 @@
 
 -(void)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer
 {
+    //All the magic numbers here were getting unwiedly, so I made some defines.  Yay for me!
     
     if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint currentVelocityPoint = [recognizer velocityInView:self];
         CGFloat currentVelocityX = currentVelocityPoint.x;
                 
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if (_insertDiskView.frame.origin.x <= 784 && currentVelocityX < 0) {
+        if (IPAD()) {
+            if (_insertDiskView.frame.origin.x <= IPAD_INSERT_VIEW_THRESHOLD && currentVelocityX < NO_VELOCITY) {
                 return;
             }
         }
-        else if (_insertDiskView.frame.origin.x <= 287 && currentVelocityX < 0) {
+        else if (_insertDiskView.frame.origin.x <= IPHONE_INSERT_VIEW_THRESHOLD && currentVelocityX < NO_VELOCITY) {
             return;
         }
         
@@ -460,8 +461,8 @@
         CGPoint newPoint = [recognizer translationInView:self];
         CGPoint finalPoint = CGPointMake(centerPoint.x + newPoint.x, centerPoint.y + newPoint.y);
         
-        if (finalPoint.x >= UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 784 : 287) {
-            [_insertDiskView setFrame:CGRectMake(finalPoint.x, 0, 240, 320)];
+        if (finalPoint.x >= IPAD() ? IPAD_INSERT_VIEW_THRESHOLD : IPHONE_INSERT_VIEW_THRESHOLD) {
+            [_insertDiskView setFrame:CGRectMake(finalPoint.x, 0, INSERT_VIEW_WIDTH, IPAD() ? IPAD_INSERT_VIEW_HEIGHT : IPHONE_INSERT_VIEW_HEIGHT)];
             
             [recognizer setTranslation:CGPointZero inView:self];
         }
@@ -472,8 +473,8 @@
         }
     }
     else if ([recognizer state] == UIGestureRecognizerStateEnded) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if (_insertDiskView.frame.origin.x > 930) {
+        if (IPAD()) {
+            if (_insertDiskView.frame.origin.x > IPAD_HIDE_THRESHOLD) {
                 [_insertDiskView hide];
             }
             else {
@@ -481,7 +482,7 @@
             }
         }
         else {
-            if (_insertDiskView.frame.origin.x < 383) {
+            if (_insertDiskView.frame.origin.x < IPHONE_SHOW_THESHOLD) {
                 [_insertDiskView show];
             }
             else {

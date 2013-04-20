@@ -22,7 +22,7 @@ IMPORTFUNC blnr InitEmulation(void);
     
     CGRect windowFrame;
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == YES) {
+    if (IPAD()) {
         windowFrame = CGRectMake(0, 0, 1024, 768);
     }
     else {
