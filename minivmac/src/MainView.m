@@ -4,18 +4,16 @@
 #import "VirtualMouseController.h"
 #import "EmulationManager.h"
 
+@interface MainView ()
+@property (nonatomic) CGFloat initialTouchPositionX;
+@property (nonatomic) CGFloat initialHoizontalCenter;
+
+@end
 @implementation MainView
 
 - (id)initWithFrame:(CGRect)rect
 {
     if (self = [super initWithFrame:rect]) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [self setBackgroundColor:[UIColor blackColor]];
-        }
-        else {
-            [self setBackgroundColor:[UIColor underPageBackgroundColor]];
-        }
-        
         [self didChangePreferences:nil];
         [self setMultipleTouchEnabled:YES];
         
@@ -39,15 +37,14 @@
         [self scrollScreenViewTo:_screenPosition];
         
         _keyboardView = nil;
-        _insertDiskView = nil;
-        _settingsView = nil;
+        
+        [self _createInsertDiskView];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangePreferences:) name:NSUserDefaultsDidChangeNotification object:nil];
         
         UISwipeGestureRecognizer *up = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
         UISwipeGestureRecognizer *down = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
-        UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
-        UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
         
         [up setNumberOfTouchesRequired:2];
         [up setDirection:UISwipeGestureRecognizerDirectionUp];
@@ -57,18 +54,16 @@
         [down setDirection:UISwipeGestureRecognizerDirectionDown];
         [down setCancelsTouchesInView:NO];
         
-        [left setNumberOfTouchesRequired:2];
-        [left setDirection:UISwipeGestureRecognizerDirectionLeft];
-        [left setCancelsTouchesInView:NO];
-        
-        [right setNumberOfTouchesRequired:2];
-        [right setDirection:UISwipeGestureRecognizerDirectionRight];
-        [right setCancelsTouchesInView:NO];
+        [pan requireGestureRecognizerToFail:up];
+        [pan requireGestureRecognizerToFail:down];
+
+        [pan setMinimumNumberOfTouches:2];
+        [pan setMaximumNumberOfTouches:2];
+        [pan setCancelsTouchesInView:NO];
         
         [self addGestureRecognizer:up];
         [self addGestureRecognizer:down];
-        [self addGestureRecognizer:left];
-        [self addGestureRecognizer:right];
+        [self addGestureRecognizer:pan];
         
     }
     
@@ -102,13 +97,6 @@
     [self addSubview:_insertDiskView];
     
     [_insertDiskView setDiskDrive:[VirtualDiskDriveController sharedInstance]];
-}
-
-- (void)_createSettingsView
-{
-    _settingsView = [[SettingsView alloc] initWithFrame:SettingsViewFrameHidden];
-    
-    [self addSubview:_settingsView];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -236,10 +224,6 @@
         
         if (delta.y < -kSwipeThresholdVertical) {
             swipeDirection |= dirDown;
-        }
-        
-        if (!swipeDirection) {
-            [self twoFingerTapGesture:event];
         }
         
         return;
@@ -395,18 +379,18 @@
 
 - (void)toggleScreenSize
 {
-    [UIView animateWithDuration:NewDiskViewAnimationDuration
-                     animations:^{
-                         _screenSizeToFit = !_screenSizeToFit;
-                         
-                         if (_screenSizeToFit) {
-                             [_screenView setFrame:kScreenRectFullScreen];
-                         }
-                         else {
-                             [_screenView setFrame:kScreenRectRealSize];
-                             
-                             [self scrollScreenViewTo:_screenPosition];
-                         }                     }
+    [UIView animateWithDuration:NewDiskViewAnimationDuration animations:^{
+        _screenSizeToFit = !_screenSizeToFit;
+        
+        if (_screenSizeToFit) {
+            [_screenView setFrame:kScreenRectFullScreen];
+        }
+        else {
+            [_screenView setFrame:kScreenRectRealSize];
+            
+            [self scrollScreenViewTo:_screenPosition];
+        }
+    }
      
                      completion:^(BOOL finished) {
                          [[NSUserDefaults standardUserDefaults] setBool:_screenSizeToFit forKey:@"ScreenSizeToFit"];
@@ -452,20 +436,64 @@
         [self bringSubviewToFront:_insertDiskView];
     }
     else {
-        if (_settingsView == nil) {
-            [self _createSettingsView];
+        [_insertDiskView hide];
+    }
+}
+
+-(void)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer
+{
+    
+    if (recognizer.state == UIGestureRecognizerStateChanged) {
+        CGPoint currentVelocityPoint = [recognizer velocityInView:self];
+        CGFloat currentVelocityX = currentVelocityPoint.x;
+                
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (_insertDiskView.frame.origin.x <= 784 && currentVelocityX < 0) {
+                return;
+            }
+        }
+        else if (_insertDiskView.frame.origin.x <= 287 && currentVelocityX < 0) {
+            return;
         }
         
-        [_settingsView show];
+        CGPoint centerPoint = self.insertDiskView.frame.origin;
+        CGPoint newPoint = [recognizer translationInView:self];
+        CGPoint finalPoint = CGPointMake(centerPoint.x + newPoint.x, centerPoint.y + newPoint.y);
         
-        [self bringSubviewToFront:_settingsView];
+        if (finalPoint.x >= UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 784 : 287) {
+            [_insertDiskView setFrame:CGRectMake(finalPoint.x, 0, 240, 320)];
+            
+            [recognizer setTranslation:CGPointZero inView:self];
+        }
+        else {
+            [recognizer setTranslation:CGPointZero inView:self];
+            
+            return;
+        }
+    }
+    else if ([recognizer state] == UIGestureRecognizerStateEnded) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (_insertDiskView.frame.origin.x > 930) {
+                [_insertDiskView hide];
+            }
+            else {
+                [_insertDiskView show];
+            }
+        }
+        else {
+            if (_insertDiskView.frame.origin.x < 383) {
+                [_insertDiskView show];
+            }
+            else {
+                [_insertDiskView hide];
+            }
+        }
         
     }
 }
 
-- (void)twoFingerTapGesture:(UIEvent *)event
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self toggleScreenSize];
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
-
 @end

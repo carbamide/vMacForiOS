@@ -4,7 +4,6 @@
 #import "AppDelegate.h"
 #import "SurfaceView.h"
 #import "InsertDiskView.h"
-#import "SettingsView.h"
 #import "KeyboardView.h"
 
 @interface MainView : UIView
@@ -12,7 +11,6 @@
 @property (strong, nonatomic) SurfaceView *screenView;
 @property (strong, nonatomic) KeyboardView *keyboardView;
 @property (strong, nonatomic) InsertDiskView *insertDiskView;
-@property (strong, nonatomic) SettingsView *settingsView;
 @property (strong, nonatomic) UITouch *mouseTouch;
 @property (nonatomic) Direction screenPosition;
 @property (nonatomic) BOOL screenSizeToFit;
@@ -33,7 +31,6 @@
 - (void)didChangePreferences:(NSNotification *)aNotification;
 - (void)_createKeyboardView;
 - (void)_createInsertDiskView;
-- (void)_createSettingsView;
 
 - (Point)mouseLocForCGPoint:(CGPoint)point;
 - (void)scheduleMouseClickAt:(Point)mouseLoc;
@@ -44,6 +41,5 @@
 - (void)scrollScreenViewTo:(Direction)scroll;
 
 - (void)twoFingerSwipeGesture:(id)sender;
-- (void)twoFingerTapGesture:(UIEvent *)event;
 
 @end

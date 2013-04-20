@@ -29,17 +29,13 @@
             [navItem setLeftBarButtonItem:button animated:NO];
         }
         
-        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(hide)];
-        
-        [navItem setRightBarButtonItem:button animated:NO];
-        
         [_navBar pushNavigationItem:navItem animated:NO];
         
         [self addSubview:_navBar];
         
 		[[self layer] setShadowColor:[[UIColor blackColor] CGColor]];
-		[[self layer] setShadowOffset:CGSizeMake(-10, 0)];
-		[[self layer] setShadowRadius:5];
+		[[self layer] setShadowOffset:CGSizeMake(0, 0)];
+		[[self layer] setShadowRadius:15];
 		[[self layer] setShadowOpacity:0.8];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didInsertDisk:) name:@"diskInserted" object:nil];

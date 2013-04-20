@@ -52,7 +52,6 @@
 		C1CD3FF0147A5192009C3F2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FB4147A5190009C3F2F /* main.m */; };
 		C1CD3FF1147A5192009C3F2F /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FB6147A5190009C3F2F /* MainView.m */; };
 		C1CD4002147A5192009C3F2F /* NewDiskView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE2147A5191009C3F2F /* NewDiskView.m */; };
-		C1CD4003147A5192009C3F2F /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE5147A5191009C3F2F /* SettingsView.m */; };
 		C1CD4004147A5192009C3F2F /* SurfaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE7147A5191009C3F2F /* SurfaceView.m */; };
 		C1CD4044147A51D0009C3F2F /* diskEject.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C1CD4007147A51CC009C3F2F /* diskEject.aiff */; };
 		C1CD4045147A51D0009C3F2F /* DiskListFloppy.png in Resources */ = {isa = PBXBuildFile; fileRef = C1CD4008147A51CC009C3F2F /* DiskListFloppy.png */; };
@@ -197,8 +196,6 @@
 		C1CD3FE1147A5191009C3F2F /* NewDiskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDiskView.h; path = src/NewDiskView.h; sourceTree = "<group>"; };
 		C1CD3FE2147A5191009C3F2F /* NewDiskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDiskView.m; path = src/NewDiskView.m; sourceTree = "<group>"; };
 		C1CD3FE3147A5191009C3F2F /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.h; path = src/prefix.h; sourceTree = "<group>"; };
-		C1CD3FE4147A5191009C3F2F /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsView.h; path = src/SettingsView.h; sourceTree = "<group>"; };
-		C1CD3FE5147A5191009C3F2F /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsView.m; path = src/SettingsView.m; sourceTree = "<group>"; };
 		C1CD3FE6147A5191009C3F2F /* SurfaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SurfaceView.h; path = src/SurfaceView.h; sourceTree = "<group>"; };
 		C1CD3FE7147A5191009C3F2F /* SurfaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SurfaceView.m; path = src/SurfaceView.m; sourceTree = "<group>"; };
 		C1CD3FE9147A5191009C3F2F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = src/AppDelegate.h; sourceTree = "<group>"; };
@@ -332,8 +329,6 @@
 				C1CD3FB6147A5190009C3F2F /* MainView.m */,
 				C1CD3FE1147A5191009C3F2F /* NewDiskView.h */,
 				C1CD3FE2147A5191009C3F2F /* NewDiskView.m */,
-				C1CD3FE4147A5191009C3F2F /* SettingsView.h */,
-				C1CD3FE5147A5191009C3F2F /* SettingsView.m */,
 				C1CD3FE6147A5191009C3F2F /* SurfaceView.h */,
 				C1CD3FE7147A5191009C3F2F /* SurfaceView.m */,
 			);
@@ -764,7 +759,6 @@
 				C14B18BD147E117D00A11CFF /* AppDelegate.m in Sources */,
 				C1CD3FF1147A5192009C3F2F /* MainView.m in Sources */,
 				C1CD4002147A5192009C3F2F /* NewDiskView.m in Sources */,
-				C1CD4003147A5192009C3F2F /* SettingsView.m in Sources */,
 				C1CD4004147A5192009C3F2F /* SurfaceView.m in Sources */,
 				291DFE0416DEF05000F03EF5 /* VirtualMouseController.m in Sources */,
 				291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */,

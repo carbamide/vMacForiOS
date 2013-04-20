@@ -61,7 +61,7 @@ IMPORTFUNC blnr InitEmulation(void);
     _romData = [NSData dataWithContentsOfFile:romPath];
     
     if (_romData == nil) {
-        [[Helpers sharedInstance] warnMessage:[NSString stringWithFormat:NSLocalizedString(@"WarnNoROM", nil), RomFileName]];
+        [[Helpers sharedInstance] warnMessage:[NSString stringWithFormat:@"Unable to load vMac.ROM from the Documents folder. Please transfer vMac.ROM using iTunes file sharing."]];
         
         return NO;
     }

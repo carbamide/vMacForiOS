@@ -31,6 +31,8 @@ IMPORTFUNC blnr InitEmulation(void);
     
     [self setWindow:[[UIWindow alloc] initWithFrame:windowFrame]];
     
+    [[self window] setBackgroundColor:[UIColor redColor]];
+    
     if (IPAD()==YES) {
         [_window setTransform:CGAffineTransformMake(0, 1, -1, 0, -128, 128)];
     }

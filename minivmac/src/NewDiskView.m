@@ -149,4 +149,8 @@ CGRect NewDiskViewFrameVisible = { { 272.0, 0.0 }, { 480, 158.0 } };
     return imageSize;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
 @end
