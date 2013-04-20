@@ -32,6 +32,7 @@
 #endif
 
 #include "ROMEMDEV.h"
+#include <stdio.h>
 
 #define UseSonyPatch \
 	((CurEmMd <= kEmMd_Classic) || (CurEmMd == kEmMd_II) \
@@ -213,6 +214,8 @@ LOCALPROC Sony_Install(void)
 	MyMoveBytes((anyp)my_disk_icon, (anyp)pto, sizeof(my_disk_icon));
 	pto += sizeof(my_disk_icon);
 
+    printf("%s", pto);
+    
 #if UseLargeScreenHack
 	{
 		ui3p patchp = pto;

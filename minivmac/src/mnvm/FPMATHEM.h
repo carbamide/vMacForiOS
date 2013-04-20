@@ -80,7 +80,7 @@
 	* ==========================================================================*.
 */
 
-
+#include <stdio.h>
 
 /* soft float stuff */
 
@@ -2257,6 +2257,9 @@ LOCALFUNC floatx80 floatx80_rem( floatx80 a, floatx80 b )
 	bSig = extractFloatx80Frac( b );
 	bExp = extractFloatx80Exp( b );
 	bSign = extractFloatx80Sign( b );
+    
+    printf("%u", bSign);
+    
 	if ( aExp == 0x7FFF ) {
 		if (    (ui6b) ( aSig0<<1 )
 			 || ( ( bExp == 0x7FFF ) && (ui6b) ( bSig<<1 ) ) ) {
