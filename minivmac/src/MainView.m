@@ -29,9 +29,7 @@
         _updateColorMode = NSSelectorFromString(@"useColorMode:");
         
         SurfaceScrnBuf = [_screenView pixels];
-        
-        _screenPosition = [[NSUserDefaults standardUserDefaults] integerForKey:@"ScreenPosition"];
-        
+                
         _keyboardView = nil;
         
         [self _createInsertDiskView];

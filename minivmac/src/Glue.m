@@ -7,6 +7,9 @@
 #import "objc/message.h"
 #import "VirtualDiskDriveController.h"
 #import "SVProgressHUD.h"
+#import "EmulationManager.h"
+
+#import "PROGMAIN.h"
 
 blnr SpeedStopped = falseblnr;
 NSInteger numInsertedDisks;

@@ -217,7 +217,7 @@ EXPORTVAR(ui3b, SpeedValue)
 EXPORTVAR(ui3b, CurMouseButton)
 EXPORTVAR(ui4b, CurMouseV)
 EXPORTVAR(ui4b, CurMouseH)
-EXPORTVAR(blnr, HaveMouseMotion);
+EXPORTVAR(blnr, HaveMouseMotion)
 
 #ifndef EnableMouseMotion
 #define EnableMouseMotion 1

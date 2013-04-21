@@ -12,7 +12,6 @@
 @property (strong, nonatomic) KeyboardView *keyboardView;
 @property (strong, nonatomic) InsertDiskView *insertDiskView;
 @property (strong, nonatomic) UITouch *mouseTouch;
-@property (nonatomic) Direction screenPosition;
 @property (nonatomic) BOOL screenSizeToFit;
 @property (nonatomic) BOOL trackpadClick;
 @property (nonatomic) BOOL clickScheduled;
