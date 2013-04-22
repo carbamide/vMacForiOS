@@ -4,13 +4,16 @@
 #import "VirtualMouseController.h"
 #import "EmulationManager.h"
 
+@interface MainView ()
+@property (nonatomic) CGFloat initialTouchPositionX;
+@property (nonatomic) CGFloat initialHoizontalCenter;
+
+@end
 @implementation MainView
 
 - (id)initWithFrame:(CGRect)rect
 {
     if (self = [super initWithFrame:rect]) {
-        [self setBackgroundColor:[UIColor blackColor]];
-        [self didChangePreferences:nil];
         [self setMultipleTouchEnabled:YES];
         
         CGRect screenRect = kScreenRectFullScreen;
@@ -26,22 +29,14 @@
         _updateColorMode = NSSelectorFromString(@"useColorMode:");
         
         SurfaceScrnBuf = [_screenView pixels];
-        
-        _screenSizeToFit = YES;
-        _screenPosition = [[NSUserDefaults standardUserDefaults] integerForKey:@"ScreenPosition"];
-        
-        [self scrollScreenViewTo:_screenPosition];
-        
+                
         _keyboardView = nil;
-        _insertDiskView = nil;
-        _settingsView = nil;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangePreferences:) name:NSUserDefaultsDidChangeNotification object:nil];
+        [self _createInsertDiskView];
         
         UISwipeGestureRecognizer *up = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
         UISwipeGestureRecognizer *down = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
-        UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
-        UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeGesture:)];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
         
         [up setNumberOfTouchesRequired:2];
         [up setDirection:UISwipeGestureRecognizerDirectionUp];
@@ -51,27 +46,20 @@
         [down setDirection:UISwipeGestureRecognizerDirectionDown];
         [down setCancelsTouchesInView:NO];
         
-        [left setNumberOfTouchesRequired:2];
-        [left setDirection:UISwipeGestureRecognizerDirectionLeft];
-        [left setCancelsTouchesInView:NO];
+        [pan requireGestureRecognizerToFail:up];
+        [pan requireGestureRecognizerToFail:down];
         
-        [right setNumberOfTouchesRequired:2];
-        [right setDirection:UISwipeGestureRecognizerDirectionRight];
-        [right setCancelsTouchesInView:NO];
+        [pan setMinimumNumberOfTouches:2];
+        [pan setMaximumNumberOfTouches:2];
+        [pan setCancelsTouchesInView:NO];
         
         [self addGestureRecognizer:up];
         [self addGestureRecognizer:down];
-        [self addGestureRecognizer:left];
-        [self addGestureRecognizer:right];
+        [self addGestureRecognizer:pan];
         
     }
     
     return self;
-}
-
-- (void)didChangePreferences:(NSNotification *)aNotification
-{
-    _trackpadMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"TrackpadMode"];
 }
 
 - (void)_createKeyboardView
@@ -98,13 +86,6 @@
     [_insertDiskView setDiskDrive:[VirtualDiskDriveController sharedInstance]];
 }
 
-- (void)_createSettingsView
-{
-    _settingsView = [[SettingsView alloc] initWithFrame:SettingsViewFrameHidden];
-    
-    [self addSubview:_settingsView];
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if ([[event allTouches] count] > 1) {
@@ -129,74 +110,17 @@
     
     CGPoint tapLoc = [_mouseTouch locationInView:self];
     
-    if (!_screenSizeToFit) {
-        CGPoint screenLoc = [_screenView frame].origin;
-        
-        Direction scrollTo = 0;
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
-                scrollTo |= dirLeft;
-            }
-            
-            if (tapLoc.y < kScreenEdgeSize && screenLoc.y != 0.0) {
-                scrollTo |= dirUp;
-            }
-            
-            if (tapLoc.x > (1024 - kScreenEdgeSize) && screenLoc.x == 0.0) {
-                scrollTo |= dirRight;
-            }
-            
-            if (tapLoc.y > (768 - kScreenEdgeSize) && screenLoc.y == 0.0) {
-                scrollTo |= dirDown;
-            }
-        }
-        else {
-            if (tapLoc.x < kScreenEdgeSize && screenLoc.x != 0.0) {
-                scrollTo |= dirLeft;
-            }
-            
-            if (tapLoc.y < kScreenEdgeSize && screenLoc.y != 0.0) {
-                scrollTo |= dirUp;
-            }
-            
-            if (tapLoc.x > (480-kScreenEdgeSize) && screenLoc.x == 0.0) {
-                scrollTo |= dirRight;
-            }
-            if (tapLoc.y > (320-kScreenEdgeSize) && screenLoc.y == 0.0) {
-                scrollTo |= dirDown;
-            }
-        }
-        
-        
-        if (scrollTo) {
-            [self scrollScreenViewTo:scrollTo];
-            return;
-        }
-    }
-    
     Point loc = [self mouseLocForCGPoint:tapLoc];
     
     NSTimeInterval mouseTime = event.timestamp;
     NSTimeInterval mouseDiff = mouseTime - _lastMouseClick;
     
-    if (_trackpadMode) {
-        _trackpadClick = YES;
-        
-        if ((mouseDiff <= TRACKPAD_DRAG_DELAY) && (PointDistanceSq(loc, _lastMouseLoc) < MOUSE_LOC_THRESHOLD)) {
-            _mouseDrag = YES;
-            
-            [[VirtualMouseController sharedInstance] setMouseButtonDown];
-        }
+    if ((mouseDiff < MOUSE_DBLCLICK_TIME) && (PointDistanceSq(loc, _lastMouseLoc) < MOUSE_LOC_THRESHOLD)) {
+        loc = _lastMouseLoc;
     }
-    else {
-        if ((mouseDiff < MOUSE_DBLCLICK_TIME) && (PointDistanceSq(loc, _lastMouseLoc) < MOUSE_LOC_THRESHOLD)) {
-            loc = _lastMouseLoc;
-        }
-        
-        [[VirtualMouseController sharedInstance] setMouseLoc:loc];
-        [[VirtualMouseController sharedInstance] performSelector:@selector(setMouseButtonDown) withObject:nil afterDelay:MOUSE_CLICK_DELAY];
-    }
+    
+    [[VirtualMouseController sharedInstance] setMouseLoc:loc];
+    [[VirtualMouseController sharedInstance] performSelector:@selector(setMouseButtonDown) withObject:nil afterDelay:MOUSE_CLICK_DELAY];
     
     _lastMouseLoc = loc;
     _lastMouseTime = _lastMouseClick = mouseTime;
@@ -211,62 +135,19 @@
         
         _inGesture = NO;
         
-        CGPoint gestureEnd = [touches.anyObject locationInView:self];
-        
-        Direction swipeDirection = 0;
-        CGPoint delta = CGPointMake(_gestureStart.x - gestureEnd.x, _gestureStart.y - gestureEnd.y);
-        
-        if (delta.x > kSwipeThresholdHorizontal) {
-            swipeDirection |= dirLeft;
-        }
-        
-        if (delta.x < -kSwipeThresholdHorizontal) {
-            swipeDirection |= dirRight;
-        }
-        
-        if (delta.y > kSwipeThresholdVertical) {
-            swipeDirection |= dirUp;
-        }
-        
-        if (delta.y < -kSwipeThresholdVertical) {
-            swipeDirection |= dirDown;
-        }
-        
-        if (!swipeDirection) {
-            [self twoFingerTapGesture:event];
-        }
-        
         return;
     }
     
     Point loc = [self mouseLocForCGPoint:[_mouseTouch locationInView:self]];
     
-    NSTimeInterval mouseTime = [event timestamp];
-    NSTimeInterval mouseDiff = mouseTime - _lastMouseClick;
+    if (PointDistanceSq(loc, _lastMouseLoc) < MOUSE_LOC_THRESHOLD) {
+        loc = _lastMouseLoc;
+    }
     
-    if (_trackpadMode) {
-        if (_trackpadClick && (mouseDiff <= TRACKPAD_CLICK_TIME)) {
-            [self scheduleMouseClickAt:[[VirtualMouseController sharedInstance] mouseLoc]];
-        }
-        
-        _trackpadClick = NO;
-        
-        if (_mouseDrag) {
-            [[VirtualMouseController sharedInstance] setMouseButtonUp];
-            
-            _mouseDrag = NO;
-        }
-    }
-    else {
-        if (PointDistanceSq(loc, _lastMouseLoc) < MOUSE_LOC_THRESHOLD) {
-            loc = _lastMouseLoc;
-        }
-        
-        [[VirtualMouseController sharedInstance] setMouseLoc:loc];
-        [[VirtualMouseController sharedInstance] performSelector:@selector(setMouseButtonUp) withObject:nil afterDelay:MOUSE_CLICK_DELAY];
-        
-        _mouseDrag = NO;
-    }
+    [[VirtualMouseController sharedInstance] setMouseLoc:loc];
+    [[VirtualMouseController sharedInstance] performSelector:@selector(setMouseButtonUp) withObject:nil afterDelay:MOUSE_CLICK_DELAY];
+    
+    _mouseDrag = NO;
     
     _lastMouseLoc = loc;
 }
@@ -285,64 +166,39 @@
     
     Point loc = [self mouseLocForCGPoint:[_mouseTouch locationInView:self]];
     
-    if (_trackpadMode) {
-        Point locDiff = loc;
+    if (!_mouseDrag) {
+        [AppDelegate cancelPreviousPerformRequestsWithTarget:[VirtualMouseController sharedInstance] selector:@selector(setMouseButtonDown) object:nil];
         
-        locDiff.h -= _lastMouseLoc.h;
-        locDiff.v -= _lastMouseLoc.v;
+        [[VirtualMouseController sharedInstance] setMouseButton:YES];
         
-        NSTimeInterval timeDiff = 100 * (mouseTime - _lastMouseTime);
-        NSTimeInterval accel = TRACKPAD_ACCEL_N / (TRACKPAD_ACCEL_T + ((timeDiff * timeDiff) / TRACKPAD_ACCEL_D));
+        DoEmulateOneTick();
+        DoEmulateOneTick();
         
-        locDiff.h *= accel;
-        locDiff.v *= accel;
+        CurEmulatedTime += 2;
         
-        _trackpadClick = NO;
-        
-        [[VirtualMouseController sharedInstance] moveMouse:locDiff button:_mouseDrag];
+        _mouseDrag = YES;
     }
-    else {
-        if (!_mouseDrag) {
-            [AppDelegate cancelPreviousPerformRequestsWithTarget:[VirtualMouseController sharedInstance] selector:@selector(setMouseButtonDown) object:nil];
-            
-            [[VirtualMouseController sharedInstance] setMouseButton:YES];
-            
-            DoEmulateOneTick();
-            DoEmulateOneTick();
-            
-            CurEmulatedTime += 2;
-            
-            _mouseDrag = YES;
-        }
-        
-        [[VirtualMouseController sharedInstance] setMouseLoc:loc];
-    }
+    
+    [[VirtualMouseController sharedInstance] setMouseLoc:loc];
     
     _lastMouseTime = mouseTime;
     _lastMouseLoc = loc;
 }
+
 - (Point)mouseLocForCGPoint:(CGPoint)point
 {
     Point pt;
-    
-    if (_trackpadMode) {
-        // same location
-        pt.h = point.x;
-        pt.v = point.y;
-    }
-    else if (_screenSizeToFit) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            pt.h = point.x * (vMacScreenWidth / 1024.0);
-            pt.v = point.y * (vMacScreenHeight / 768.0);
-        }
-        else {
-            pt.h = point.x * (vMacScreenWidth / 480.0);
-            pt.v = point.y * (vMacScreenHeight / 320.0);
-        }
+        
+    if (IPAD()) {
+        pt.h = point.x * (vMacScreenWidth / 1024.0);
+        pt.v = point.y * (vMacScreenHeight / 768.0);
     }
     else {
-        pt.h = point.x - _mouseOffset.h;
-        pt.v = point.y - _mouseOffset.v;
+        //Magic number, in my code.  Makes me happy, makes me a'la'mode!
+        //Because of how the transform is being set on the key window, it screws with the ratios that would have been correct on a 3.5 inch device.
+        //Whatever.
+        pt.h = point.x * 1.37;
+        pt.v = point.y * (vMacScreenHeight / 320.0);
     }
     
     return pt;
@@ -387,37 +243,6 @@
     CurEmulatedTime += 2;
 }
 
-- (void)toggleScreenSize
-{
-    [UIView animateWithDuration:NewDiskViewAnimationDuration
-                     animations:^{
-                         _screenSizeToFit = !_screenSizeToFit;
-                         
-                         if (_screenSizeToFit) {
-                             [_screenView setFrame:kScreenRectFullScreen];
-                         }
-                         else {
-                             [_screenView setFrame:kScreenRectRealSize];
-                             
-                             [self scrollScreenViewTo:_screenPosition];
-                         }                     }
-     
-                     completion:^(BOOL finished) {
-                         [[NSUserDefaults standardUserDefaults] setBool:_screenSizeToFit forKey:@"ScreenSizeToFit"];
-                         [[NSUserDefaults standardUserDefaults] synchronize];
-                     }];
-}
-
-- (void)scrollScreenViewTo:(Direction)scroll
-{
-    CGRect screenFrame = _screenView.frame;
-    
-    _mouseOffset.h = screenFrame.origin.x;
-    _mouseOffset.v = screenFrame.origin.y;
-    
-    return;
-}
-
 - (void)twoFingerSwipeGesture:(id)sender
 {
     UISwipeGestureRecognizer *tempGesture = sender;
@@ -446,20 +271,64 @@
         [self bringSubviewToFront:_insertDiskView];
     }
     else {
-        if (_settingsView == nil) {
-            [self _createSettingsView];
-        }
-        
-        [_settingsView show];
-        
-        [self bringSubviewToFront:_settingsView];
-        
+        [_insertDiskView hide];
     }
 }
 
-- (void)twoFingerTapGesture:(UIEvent *)event
+-(void)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer
 {
-    [self toggleScreenSize];
+    //All the magic numbers here were getting unwiedly, so I made some defines.  Yay for me!
+    
+    if ([recognizer state] == UIGestureRecognizerStateChanged) {
+        CGPoint currentVelocityPoint = [recognizer velocityInView:self];
+        CGFloat currentVelocityX = currentVelocityPoint.x;
+        
+        if (IPAD()) {
+            if (_insertDiskView.frame.origin.x <= IPAD_INSERT_VIEW_THRESHOLD && currentVelocityX < NO_VELOCITY) {
+                return;
+            }
+        }
+        else if (_insertDiskView.frame.origin.x <= IPHONE_INSERT_VIEW_THRESHOLD && currentVelocityX < NO_VELOCITY) {
+            return;
+        }
+        
+        CGPoint centerPoint = self.insertDiskView.frame.origin;
+        CGPoint newPoint = [recognizer translationInView:self];
+        CGPoint finalPoint = CGPointMake(centerPoint.x + newPoint.x, centerPoint.y + newPoint.y);
+        
+        if (finalPoint.x >= IPAD() ? IPAD_INSERT_VIEW_THRESHOLD : IPHONE_INSERT_VIEW_THRESHOLD) {
+            [_insertDiskView setFrame:CGRectMake(finalPoint.x, 0, INSERT_VIEW_WIDTH, IPAD() ? IPAD_INSERT_VIEW_HEIGHT : IPHONE_INSERT_VIEW_HEIGHT)];
+            
+            [recognizer setTranslation:CGPointZero inView:self];
+        }
+        else {
+            [recognizer setTranslation:CGPointZero inView:self];
+            
+            return;
+        }
+    }
+    else if ([recognizer state] == UIGestureRecognizerStateEnded) {
+        if (IPAD()) {
+            if (_insertDiskView.frame.origin.x > IPAD_HIDE_THRESHOLD) {
+                [_insertDiskView hide];
+            }
+            else {
+                [_insertDiskView show];
+            }
+        }
+        else {
+            if (_insertDiskView.frame.origin.x < IPHONE_SHOW_THESHOLD) {
+                [_insertDiskView show];
+            }
+            else {
+                [_insertDiskView hide];
+            }
+        }
+    }
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
 @end

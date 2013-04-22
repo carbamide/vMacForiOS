@@ -3,8 +3,8 @@
 #import "VirtualDiskDriveController.h"
 
 float NewDiskViewAnimationDuration = 0.3;
-CGRect NewDiskViewFrameHidden = { { 272.0, -158.0 }, { 480.0, 158.0 } };
-CGRect NewDiskViewFrameVisible = { { 272.0, 0.0 }, { 480.0, 158.0 } };
+CGRect NewDiskViewFrameHidden = { { 272.0, -158.0 }, { 480, 158.0 } };
+CGRect NewDiskViewFrameVisible = { { 272.0, 0.0 }, { 480, 158.0 } };
 
 @implementation NewDiskView
 - (id)initWithFrame:(CGRect)rect
@@ -149,4 +149,8 @@ CGRect NewDiskViewFrameVisible = { { 272.0, 0.0 }, { 480.0, 158.0 } };
     return imageSize;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
 @end

@@ -61,7 +61,7 @@ IMPORTFUNC blnr InitEmulation(void);
     _romData = [NSData dataWithContentsOfFile:romPath];
     
     if (_romData == nil) {
-        [[Helpers sharedInstance] warnMessage:[NSString stringWithFormat:NSLocalizedString(@"WarnNoROM", nil), RomFileName]];
+        [[Helpers sharedInstance] warnMessage:[NSString stringWithFormat:@"Unable to load vMac.ROM from the Documents folder. Please transfer vMac.ROM using iTunes file sharing."]];
         
         return NO;
     }
@@ -100,20 +100,20 @@ IMPORTFUNC blnr InitEmulation(void);
     CurMacDateInSeconds = time(NULL) + MacDateDiff;
     
     if (![[VirtualDiskDriveController sharedInstance] initDrives]) {
-        [[Helpers sharedInstance]  warnMessage:NSLocalizedString(@"WarnNoDrives", nil)];
+        [[Helpers sharedInstance] warnMessage:NSLocalizedString(@"WarnNoDrives", nil)];
         
         return NO;
     }
     
 #if MySoundEnabled
     if (!MySound_Init()) {
-        [[Helpers sharedInstance]  warnMessage:NSLocalizedString(@"WarnNoSound", nil)];
+        [[Helpers sharedInstance] warnMessage:NSLocalizedString(@"WarnNoSound", nil)];
     }
 #endif
     
     // init emulation
     if (!InitEmulation()) {
-        [[Helpers sharedInstance]  warnMessage:NSLocalizedString(@"WarnNoEmu", nil)];
+        [[Helpers sharedInstance] warnMessage:NSLocalizedString(@"WarnNoEmu", nil)];
         
         return NO;
     }
@@ -123,16 +123,6 @@ IMPORTFUNC blnr InitEmulation(void);
 
 - (void)startEmulation:(id)sender
 {
-    NSFileManager *mng = [NSFileManager defaultManager];
-    
-    for (int i = 1; i <= NumDrives; i++) {
-        NSString *path = [[[Helpers sharedInstance] documentsPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"disk%d.dsk", i]];
-        
-        if ([mng fileExistsAtPath:path]) {
-            //[[VirtualDiskDriveController sharedInstance] insertDisk:path];
-        }
-    }
-    
     [self resumeEmulation];
 }
 

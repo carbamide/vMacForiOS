@@ -29,18 +29,32 @@
             [navItem setLeftBarButtonItem:button animated:NO];
         }
         
-        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(hide)];
-        
-        [navItem setRightBarButtonItem:button animated:NO];
-        
         [_navBar pushNavigationItem:navItem animated:NO];
         
         [self addSubview:_navBar];
         
 		[[self layer] setShadowColor:[[UIColor blackColor] CGColor]];
-		[[self layer] setShadowOffset:CGSizeMake(-10, 0)];
-		[[self layer] setShadowRadius:5];
+		[[self layer] setShadowOffset:CGSizeMake(0, 0)];
+		[[self layer] setShadowRadius:15];
 		[[self layer] setShadowOpacity:0.8];
+        
+        UIBezierPath *navBarMaskPath = [UIBezierPath bezierPathWithRoundedRect:[_navBar bounds] byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) cornerRadii:CGSizeMake(8.0, 8.0)];
+        UIBezierPath *tableMaskPath = [UIBezierPath bezierPathWithRoundedRect:[_table bounds] byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) cornerRadii:CGSizeMake(8.0, 8.0)];
+
+        CAShapeLayer *navBarMaskLayer = [[CAShapeLayer alloc] init];
+        CAShapeLayer *tableMaskLayer = [[CAShapeLayer alloc] init];
+
+        [navBarMaskLayer setFrame:[_navBar bounds]];
+        [navBarMaskLayer setPath:[navBarMaskPath CGPath]];
+        [tableMaskLayer setFrame:[_table bounds]];
+        [tableMaskLayer setPath:[tableMaskPath CGPath]];
+        
+        [[_navBar layer] setMask:navBarMaskLayer];
+        [[_table layer] setMask:tableMaskLayer];
+        
+        
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setOpaque:NO];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didInsertDisk:) name:@"diskInserted" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEjectDisk:) name:@"diskEjected" object:nil];
@@ -162,7 +176,13 @@
     
     [[cell imageView] setImage:[self iconForDiskImageAtPath:diskPath]];
     [[cell textLabel] setText:[diskPath lastPathComponent]];
-    [[cell textLabel] setTextColor:[UIColor blackColor]];
+    
+    if ([_diskDrive diskIsInserted:_diskFiles[[indexPath row]]]) {
+        [[cell textLabel] setTextColor:[UIColor darkGrayColor]];
+    }
+    else {
+        [[cell textLabel] setTextColor:[UIColor blackColor]];
+    }
     
     return cell;
 }
@@ -199,7 +219,7 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     @try {
         id diskFile = _diskFiles[[indexPath row]];
         

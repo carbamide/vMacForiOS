@@ -9,10 +9,15 @@
 /* Begin PBXBuildFile section */
 		291DFE0416DEF05000F03EF5 /* VirtualMouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */; };
 		291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */; };
+		291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 291EC69217233F8300D40B90 /* SVProgressHUD.bundle */; };
+		291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 291EC69417233F8300D40B90 /* SVProgressHUD.m */; };
 		29457D5116D923DE00361282 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 29457D5016D923DE00361282 /* PkgInfo */; };
 		295A8A0616E250180061102B /* EmulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0516E250180061102B /* EmulationManager.m */; };
 		295A8A0A16E253080061102B /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0916E253080061102B /* Helpers.m */; };
 		296C8D7E16D91AD000C79BE8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 296C8D7D16D91AD000C79BE8 /* Default-Landscape~ipad.png */; };
+		29D864161720D3CB00528DD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864151720D3CB00528DD9 /* Default@2x.png */; };
+		29D864181720D3D900528DD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864171720D3D900528DD9 /* Default.png */; };
+		29D8641A1720D3DF00528DD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864191720D3DF00528DD9 /* Default-568h@2x.png */; };
 		C14B18A0147E0A5F00A11CFF /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B1869147E0A5F00A11CFF /* ADBEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18A1147E0A5F00A11CFF /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = C14B186C147E0A5F00A11CFF /* AppIcon.icns */; };
 		C14B18A2147E0A5F00A11CFF /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B186D147E0A5F00A11CFF /* ASCEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -49,7 +54,6 @@
 		C1CD3FF0147A5192009C3F2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FB4147A5190009C3F2F /* main.m */; };
 		C1CD3FF1147A5192009C3F2F /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FB6147A5190009C3F2F /* MainView.m */; };
 		C1CD4002147A5192009C3F2F /* NewDiskView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE2147A5191009C3F2F /* NewDiskView.m */; };
-		C1CD4003147A5192009C3F2F /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE5147A5191009C3F2F /* SettingsView.m */; };
 		C1CD4004147A5192009C3F2F /* SurfaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FE7147A5191009C3F2F /* SurfaceView.m */; };
 		C1CD4044147A51D0009C3F2F /* diskEject.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C1CD4007147A51CC009C3F2F /* diskEject.aiff */; };
 		C1CD4045147A51D0009C3F2F /* DiskListFloppy.png in Resources */ = {isa = PBXBuildFile; fileRef = C1CD4008147A51CC009C3F2F /* DiskListFloppy.png */; };
@@ -98,6 +102,9 @@
 		291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualMouseController.m; sourceTree = "<group>"; };
 		291DFE0516DEF05D00F03EF5 /* VirtualDiskDriveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDriveController.h; sourceTree = "<group>"; };
 		291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualDiskDriveController.m; sourceTree = "<group>"; };
+		291EC69217233F8300D40B90 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		291EC69317233F8300D40B90 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		291EC69417233F8300D40B90 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		292FF27C16DB1023001FCFBA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		292FF27D16DB103A001FCFBA /* VirtualDiskDrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDrive.h; sourceTree = "<group>"; };
 		292FF27F16DB108B001FCFBA /* VirtualMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualMouse.h; sourceTree = "<group>"; };
@@ -111,6 +118,9 @@
 		296C8D7B16D91ABF00C79BE8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		296C8D7D16D91AD000C79BE8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		2998B48E16DADDA40079624E /* Mini vMac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mini vMac-Info.plist"; sourceTree = "<group>"; };
+		29D864151720D3CB00528DD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		29D864171720D3D900528DD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		29D864191720D3DF00528DD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C14B1869147E0A5F00A11CFF /* ADBEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ADBEMDEV.c; sourceTree = "<group>"; };
 		C14B186A147E0A5F00A11CFF /* ADBEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBEMDEV.h; sourceTree = "<group>"; };
 		C14B186B147E0A5F00A11CFF /* ADBSHARE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBSHARE.h; sourceTree = "<group>"; };
@@ -191,8 +201,6 @@
 		C1CD3FE1147A5191009C3F2F /* NewDiskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDiskView.h; path = src/NewDiskView.h; sourceTree = "<group>"; };
 		C1CD3FE2147A5191009C3F2F /* NewDiskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDiskView.m; path = src/NewDiskView.m; sourceTree = "<group>"; };
 		C1CD3FE3147A5191009C3F2F /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.h; path = src/prefix.h; sourceTree = "<group>"; };
-		C1CD3FE4147A5191009C3F2F /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsView.h; path = src/SettingsView.h; sourceTree = "<group>"; };
-		C1CD3FE5147A5191009C3F2F /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsView.m; path = src/SettingsView.m; sourceTree = "<group>"; };
 		C1CD3FE6147A5191009C3F2F /* SurfaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SurfaceView.h; path = src/SurfaceView.h; sourceTree = "<group>"; };
 		C1CD3FE7147A5191009C3F2F /* SurfaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SurfaceView.m; path = src/SurfaceView.m; sourceTree = "<group>"; };
 		C1CD3FE9147A5191009C3F2F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = src/AppDelegate.h; sourceTree = "<group>"; };
@@ -266,6 +274,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291EC69717233F8700D40B90 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				291EC69217233F8300D40B90 /* SVProgressHUD.bundle */,
+				291EC69317233F8300D40B90 /* SVProgressHUD.h */,
+				291EC69417233F8300D40B90 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		292FF27E16DB107E001FCFBA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +308,7 @@
 		292FF28116DB1244001FCFBA /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				291EC69717233F8700D40B90 /* SVProgressHUD */,
 				292FF28316DB1609001FCFBA /* vMac */,
 				292FF28216DB15E3001FCFBA /* Keyboard Craziness */,
 				296C8D7A16D917AE00C79BE8 /* Glue.h */,
@@ -326,8 +345,6 @@
 				C1CD3FB6147A5190009C3F2F /* MainView.m */,
 				C1CD3FE1147A5191009C3F2F /* NewDiskView.h */,
 				C1CD3FE2147A5191009C3F2F /* NewDiskView.m */,
-				C1CD3FE4147A5191009C3F2F /* SettingsView.h */,
-				C1CD3FE5147A5191009C3F2F /* SettingsView.m */,
 				C1CD3FE6147A5191009C3F2F /* SurfaceView.h */,
 				C1CD3FE7147A5191009C3F2F /* SurfaceView.m */,
 			);
@@ -499,6 +516,9 @@
 		C1CD3E2B147A50E7009C3F2F = {
 			isa = PBXGroup;
 			children = (
+				29D864191720D3DF00528DD9 /* Default-568h@2x.png */,
+				29D864171720D3D900528DD9 /* Default.png */,
+				29D864151720D3CB00528DD9 /* Default@2x.png */,
 				C1CD3E4A147A50E7009C3F2F /* Classes */,
 				C1CD3E4B147A50E7009C3F2F /* Resources */,
 				C1CD3F98147A50E9009C3F2F /* Supporting Files */,
@@ -717,6 +737,10 @@
 				C14B18A4147E0A5F00A11CFF /* dummy.txt in Resources */,
 				296C8D7E16D91AD000C79BE8 /* Default-Landscape~ipad.png in Resources */,
 				29457D5116D923DE00361282 /* PkgInfo in Resources */,
+				29D864161720D3CB00528DD9 /* Default@2x.png in Resources */,
+				29D864181720D3D900528DD9 /* Default.png in Resources */,
+				29D8641A1720D3DF00528DD9 /* Default-568h@2x.png in Resources */,
+				291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,12 +776,12 @@
 				C14B18BD147E117D00A11CFF /* AppDelegate.m in Sources */,
 				C1CD3FF1147A5192009C3F2F /* MainView.m in Sources */,
 				C1CD4002147A5192009C3F2F /* NewDiskView.m in Sources */,
-				C1CD4003147A5192009C3F2F /* SettingsView.m in Sources */,
 				C1CD4004147A5192009C3F2F /* SurfaceView.m in Sources */,
 				291DFE0416DEF05000F03EF5 /* VirtualMouseController.m in Sources */,
 				291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */,
 				295A8A0616E250180061102B /* EmulationManager.m in Sources */,
 				295A8A0A16E253080061102B /* Helpers.m in Sources */,
+				291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,6 +896,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
 				COPY_PHASE_STRIP = NO;
@@ -879,6 +904,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = minivmac/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "minivmac/Mini vMac-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-lz";
@@ -896,6 +924,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
 				COPY_PHASE_STRIP = YES;
@@ -903,6 +932,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = minivmac/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "minivmac/Mini vMac-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-lz";

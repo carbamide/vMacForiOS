@@ -8,11 +8,11 @@
 
 #define KeyboardViewFrameVisible        (IPAD()==YES ? \
 CGRectMake((1024/2)-240, 768-162.0, 480.0, 162.0) : \
-CGRectMake(0.0, 320.0-162.0, 480.0, 162.0))
+CGRectMake(0.0, 320.0-162.0, 480, 162.0))
 
 #define KeyboardViewFrameHidden         (IPAD()==YES ? \
 CGRectMake((1024/2)-240, 768.0, 480.0, 162.0) : \
-CGRectMake(0.0, 320.0, 480.0, 162.0))
+CGRectMake(0.0, 320.0, 480, 162.0))
 
 
 @interface KeyboardView : UIView {

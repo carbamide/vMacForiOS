@@ -83,7 +83,7 @@ LOCALPROC EmulatedHardwareZap(void)
 	m68k_reset();
 }
 
-LOCALPROC DoMacReset(void)
+EXPORTPROC DoMacReset(void)
 {
 	Sony_EjectAllDisks();
 	EmulatedHardwareZap();
