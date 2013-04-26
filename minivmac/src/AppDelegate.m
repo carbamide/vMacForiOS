@@ -13,6 +13,7 @@
 @end
 
 IMPORTFUNC blnr InitEmulation(void);
+IMPORTFUNC int is_iPad(void);
 
 @implementation AppDelegate
 
@@ -22,6 +23,8 @@ IMPORTFUNC blnr InitEmulation(void);
     [self initPreferences];
     
     CGRect windowFrame;
+    
+    is_iPad() ? NSLog(@"Yep, it's an iPad") : NSLog(@"Nope, not an ipad");
     
     if (IPAD()) {
         windowFrame = CGRectMake(0, 0, 1024, 768);

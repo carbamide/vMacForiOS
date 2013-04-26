@@ -156,6 +156,8 @@ EXPORTPROC ICT_add(int taskid, ui5b n);
 
 #define iCountt ui5b
 EXPORTFUNC iCountt GetCuriCount(void);
+EXPORTFUNC int is_iPad(void);
+
 EXPORTPROC ICT_Zap(void);
 
 EXPORTVAR(uimr, ICTactive)

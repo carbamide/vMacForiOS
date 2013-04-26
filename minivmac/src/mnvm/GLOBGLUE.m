@@ -1709,3 +1709,12 @@ GLOBALPROC ICT_add(int taskid, ui5b n)
 		NextiCount = when;
 	}
 }
+
+GLOBALFUNC int is_iPad(void)
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return 1;
+    }
+    
+    return 0;
+}

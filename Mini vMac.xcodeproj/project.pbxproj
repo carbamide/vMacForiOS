@@ -23,7 +23,7 @@
 		C14B18A2147E0A5F00A11CFF /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B186D147E0A5F00A11CFF /* ASCEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18A3147E0A5F00A11CFF /* Build String in Resources */ = {isa = PBXBuildFile; fileRef = C14B186F147E0A5F00A11CFF /* Build String */; };
 		C14B18A4147E0A5F00A11CFF /* dummy.txt in Resources */ = {isa = PBXBuildFile; fileRef = C14B1878147E0A5F00A11CFF /* dummy.txt */; };
-		C14B18A5147E0A5F00A11CFF /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B187C147E0A5F00A11CFF /* GLOBGLUE.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C14B18A5147E0A5F00A11CFF /* GLOBGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = C14B187C147E0A5F00A11CFF /* GLOBGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18A7147E0A5F00A11CFF /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B1880147E0A5F00A11CFF /* IWMEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18A8147E0A5F00A11CFF /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B1882147E0A5F00A11CFF /* M68KITAB.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18A9147E0A5F00A11CFF /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B1884147E0A5F00A11CFF /* MINEM68K.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -33,7 +33,7 @@
 		C14B18B2147E0A5F00A11CFF /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B1896147E0A5F00A11CFF /* SONYEMDV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18B3147E0A5F00A11CFF /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B189A147E0A5F00A11CFF /* VIA2EMDV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18B4147E0A5F00A11CFF /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B189C147E0A5F00A11CFF /* VIAEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C14B18B5147E0A5F00A11CFF /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B189E147E0A5F00A11CFF /* VIDEMDEV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C14B18B5147E0A5F00A11CFF /* VIDEMDEV.m in Sources */ = {isa = PBXBuildFile; fileRef = C14B189E147E0A5F00A11CFF /* VIDEMDEV.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18BD147E117D00A11CFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CD3FEA147A5191009C3F2F /* AppDelegate.m */; };
 		C14B18C6147E157400A11CFF /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B18C4147E157400A11CFF /* MOUSEMDV.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C14B18C9147E2BC900A11CFF /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = C14B18C8147E2BC800A11CFF /* PROGMAIN.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -138,7 +138,7 @@
 		C14B1879147E0A5F00A11CFF /* English */ = {isa = PBXFileReference; lastKnownFileType = text; name = English; path = dummy.txt; sourceTree = "<group>"; };
 		C14B187A147E0A5F00A11CFF /* FPCPEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCPEMDV.h; sourceTree = "<group>"; };
 		C14B187B147E0A5F00A11CFF /* FPMATHEM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMATHEM.h; sourceTree = "<group>"; };
-		C14B187C147E0A5F00A11CFF /* GLOBGLUE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GLOBGLUE.c; sourceTree = "<group>"; };
+		C14B187C147E0A5F00A11CFF /* GLOBGLUE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLOBGLUE.m; sourceTree = "<group>"; };
 		C14B187D147E0A5F00A11CFF /* GLOBGLUE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLOBGLUE.h; sourceTree = "<group>"; };
 		C14B187F147E0A5F00A11CFF /* INTLCHAR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTLCHAR.h; sourceTree = "<group>"; };
 		C14B1880147E0A5F00A11CFF /* IWMEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IWMEMDEV.c; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 		C14B189B147E0A5F00A11CFF /* VIA2EMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIA2EMDV.h; sourceTree = "<group>"; };
 		C14B189C147E0A5F00A11CFF /* VIAEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIAEMDEV.c; sourceTree = "<group>"; };
 		C14B189D147E0A5F00A11CFF /* VIAEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAEMDEV.h; sourceTree = "<group>"; };
-		C14B189E147E0A5F00A11CFF /* VIDEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIDEMDEV.c; sourceTree = "<group>"; };
+		C14B189E147E0A5F00A11CFF /* VIDEMDEV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIDEMDEV.m; sourceTree = "<group>"; };
 		C14B189F147E0A5F00A11CFF /* VIDEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIDEMDEV.h; sourceTree = "<group>"; };
 		C14B18B6147E0F2D00A11CFF /* MYOSGLUE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MYOSGLUE.c; sourceTree = "<group>"; };
 		C14B18C3147E147E00A11CFF /* PLATGLUE.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PLATGLUE.H; sourceTree = "<group>"; };
@@ -493,7 +493,7 @@
 			children = (
 				C14B1869147E0A5F00A11CFF /* ADBEMDEV.c */,
 				C14B186D147E0A5F00A11CFF /* ASCEMDEV.c */,
-				C14B187C147E0A5F00A11CFF /* GLOBGLUE.c */,
+				C14B187C147E0A5F00A11CFF /* GLOBGLUE.m */,
 				C14B1880147E0A5F00A11CFF /* IWMEMDEV.c */,
 				C14B1882147E0A5F00A11CFF /* M68KITAB.c */,
 				C14B1884147E0A5F00A11CFF /* MINEM68K.c */,
@@ -508,7 +508,7 @@
 				C14B1896147E0A5F00A11CFF /* SONYEMDV.c */,
 				C14B189A147E0A5F00A11CFF /* VIA2EMDV.c */,
 				C14B189C147E0A5F00A11CFF /* VIAEMDEV.c */,
-				C14B189E147E0A5F00A11CFF /* VIDEMDEV.c */,
+				C14B189E147E0A5F00A11CFF /* VIDEMDEV.m */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -756,7 +756,7 @@
 				C1CD3FEF147A5192009C3F2F /* KeyboardView.m in Sources */,
 				C1CD3FF0147A5192009C3F2F /* main.m in Sources */,
 				C14B18D3147E74C100A11CFF /* Glue.m in Sources */,
-				C14B18A5147E0A5F00A11CFF /* GLOBGLUE.c in Sources */,
+				C14B18A5147E0A5F00A11CFF /* GLOBGLUE.m in Sources */,
 				C14B18A7147E0A5F00A11CFF /* IWMEMDEV.c in Sources */,
 				C14B18A8147E0A5F00A11CFF /* M68KITAB.c in Sources */,
 				C14B18A9147E0A5F00A11CFF /* MINEM68K.c in Sources */,
@@ -766,7 +766,7 @@
 				C14B18AE147E0A5F00A11CFF /* RTCEMDEV.c in Sources */,
 				C14B18B1147E0A5F00A11CFF /* SCSIEMDV.c in Sources */,
 				C14B18B2147E0A5F00A11CFF /* SONYEMDV.c in Sources */,
-				C14B18B5147E0A5F00A11CFF /* VIDEMDEV.c in Sources */,
+				C14B18B5147E0A5F00A11CFF /* VIDEMDEV.m in Sources */,
 				C14B18DA147F312800A11CFF /* ROMEMDEV.c in Sources */,
 				C14B18A0147E0A5F00A11CFF /* ADBEMDEV.c in Sources */,
 				C14B18A2147E0A5F00A11CFF /* ASCEMDEV.c in Sources */,
