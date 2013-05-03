@@ -2,6 +2,7 @@
 #import "MainView.h"
 #import "EmulationManager.h"
 #import "SVProgressHUD.h"
+#import "SSZipArchive.h"
 
 @interface UIWindow (Additions)
 - (void)makeKey:(id)arg1;
@@ -17,6 +18,46 @@ IMPORTFUNC int is_iPad(void);
 
 @implementation AppDelegate
 
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if (url != nil && [url isFileURL]) {
+		NSString *docdir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+		
+		if ([[url lastPathComponent] rangeOfString:@"dsk" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+			NSError *error = nil;
+			
+			[[NSFileManager defaultManager] moveItemAtURL:url toURL:[NSURL fileURLWithPath:[docdir stringByAppendingPathComponent:[url lastPathComponent]]] error:&error];
+			
+			if (!error) {
+				[self alertWithTitle:@"Success" message:[NSString stringWithFormat:@"The file, %@, has been transferred to the disk list.", [url lastPathComponent]]];
+			}
+			else {
+				[self alertWithTitle:@"Error" message:[NSString stringWithFormat:@"The file, %@, has not been transferred to the disk list.", [url lastPathComponent]]];
+                
+			}
+		}
+		else if ([[url lastPathComponent] rangeOfString:@"zip" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+			if ([SSZipArchive unzipFileAtPath:[url path] toDestination:docdir]) {
+				[self alertWithTitle:@"Success" message:[NSString stringWithFormat:@"The file, %@, has been unzipped and transferred to the package list.", [url lastPathComponent]]];
+				
+				NSError *error = nil;
+				
+				[[NSFileManager defaultManager] removeItemAtPath:[url path] error:&error];
+				
+				if (error) {
+					[self alertWithTitle:@"Error" message:@"Although the package was successfully unzipped, there was an error removing the zip file."];
+				}
+			}
+			else {
+				[self alertWithTitle:@"Error" message:[NSString stringWithFormat:@"The file, %@, has not been transferred to the disk list.", [url lastPathComponent]]];
+			}
+		}
+		return YES;
+	}
+	
+	return YES;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setInitOk:[[EmulationManager sharedManager] initEmulation]];
@@ -24,7 +65,7 @@ IMPORTFUNC int is_iPad(void);
     
     CGRect windowFrame;
     
-    is_iPad() ? NSLog(@"Yep, it's an iPad") : NSLog(@"Nope, not an ipad");
+    is_iPad() ? NSLog(@"Yep, it's an iPad") : NSLog(@"Nope, not an iPad");
     
     if (IPAD()) {
         windowFrame = CGRectMake(0, 0, 1024, 768);
@@ -105,6 +146,17 @@ IMPORTFUNC int is_iPad(void);
     else {
         MySound_Stop();
     }
+}
+
+-(void)alertWithTitle:(NSString *)title message:(NSString *)message
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+	
+	[alert show];
 }
 
 @end

@@ -52,7 +52,6 @@
         [[_navBar layer] setMask:navBarMaskLayer];
         [[_table layer] setMask:tableMaskLayer];
         
-        
         [self setBackgroundColor:[UIColor clearColor]];
         [self setOpaque:NO];
         
