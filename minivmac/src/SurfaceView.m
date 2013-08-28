@@ -8,8 +8,6 @@ PixelFormat kPixelFormatARGB = "ARGB";
 
 BOOL useColor;
 
-NSLock *_lock = nil;
-
 CGColorSpaceRef colorSpace;
 CGDataProviderRef provider;
 CGImageRef cgImage;
@@ -18,28 +16,26 @@ CGColorSpaceRef rgbColorSpace;
 
 static unsigned char colorTable[] = { 0, 0, 0, 255, 255, 255, 0 };
 
-#define kDefaultScalingFilter kCAFilterLinear
-
 @implementation SurfaceView
 
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame pixelFormat:kPixelFormat565L surfaceSize:frame.size magnificationFilter:kDefaultScalingFilter minificationFilter:kDefaultScalingFilter];
+    return [self initWithFrame:frame pixelFormat:kPixelFormat565L surfaceSize:frame.size magnificationFilter:kCAFilterLinear minificationFilter:kCAFilterLinear];
 }
 
 - (id)initWithFrame:(CGRect)frame surfaceSize:(CGSize)size
 {
-    return [self initWithFrame:frame pixelFormat:kPixelFormat565L surfaceSize:size magnificationFilter:kDefaultScalingFilter minificationFilter:kDefaultScalingFilter];
+    return [self initWithFrame:frame pixelFormat:kPixelFormat565L surfaceSize:size magnificationFilter:kCAFilterLinear minificationFilter:kCAFilterLinear];
 }
 
 - (id)initWithFrame:(CGRect)frame pixelFormat:(PixelFormat)pxf
 {
-    return [self initWithFrame:frame pixelFormat:pxf surfaceSize:frame.size magnificationFilter:kDefaultScalingFilter minificationFilter:kDefaultScalingFilter];
+    return [self initWithFrame:frame pixelFormat:pxf surfaceSize:frame.size magnificationFilter:kCAFilterLinear minificationFilter:kCAFilterLinear];
 }
 
 - (id)initWithFrame:(CGRect)frame pixelFormat:(PixelFormat)pxf surfaceSize:(CGSize)size
 {
-    return [self initWithFrame:frame pixelFormat:pxf surfaceSize:size magnificationFilter:kDefaultScalingFilter minificationFilter:kDefaultScalingFilter];
+    return [self initWithFrame:frame pixelFormat:pxf surfaceSize:size magnificationFilter:kCAFilterLinear minificationFilter:kCAFilterLinear];
 }
 
 - (id)initWithFrame:(CGRect)frame pixelFormat:(PixelFormat)pxf scalingFilter:(NSString *)scalingFilter
@@ -70,15 +66,6 @@ static unsigned char colorTable[] = { 0, 0, 0, 255, 255, 255, 0 };
         pixels = (unsigned char *)malloc(delta * vMacScreenNumBytes);
         
         provider = CGDataProviderCreateWithData(NULL, pixels,  delta * vMacScreenNumBytes, NULL);
-        
-        unsigned char *c;
-        c = pixels;
-        
-        int i;
-        
-        for (i = 0; i < (delta * vMacScreenWidth * vMacScreenHeight); i++) {
-            *c++ = 0;
-        }
         
         _surfaceLayer = [CALayer layer];
         [_surfaceLayer setEdgeAntialiasingMask:15];
@@ -128,7 +115,7 @@ static unsigned char colorTable[] = { 0, 0, 0, 255, 255, 255, 0 };
                                 0,
                                 provider,
                                 NULL,
-                                false,
+                                NO,
                                 kCGRenderingIntentDefault
                                 );
         
@@ -142,7 +129,6 @@ static unsigned char colorTable[] = { 0, 0, 0, 255, 255, 255, 0 };
                                 32,                  // bpp
                                 4 * vMacScreenWidth, // bpr
                                 rgbColorSpace,
-                                //kCGBitmapByteOrder32Host| kCGImageAlphaNoneSkipLast,
                                 kCGImageAlphaNone | kCGBitmapByteOrder32Little,
                                 provider,
                                 NULL,

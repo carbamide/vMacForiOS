@@ -57,6 +57,7 @@
         [self addGestureRecognizer:down];
         [self addGestureRecognizer:pan];
         
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }
     
     return self;
@@ -330,5 +331,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 @end

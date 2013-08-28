@@ -51,7 +51,7 @@ void StartUpTimeAdjust(void);
 #define MyTickDuration        (1 / 60.14742)
 
 //FIXME This is the dumbest thing I've ever seen.
-#define DeviceScreenHeight (IPAD() == YES ? 1024 : 480);
+#define DeviceScreenHeight (IPAD() == YES ? 1024 : 568);
 #define DeviceScreenWidth (IPAD() == YES ? 768: 320);
 
 #define PointDistanceSq(a, b) ((((int)a.h - (int)b.h) * ((int)a.h - (int)b.h)) + (((int)a.v - (int)b.v) * ((int)a.v - (int)b.v)))
@@ -76,7 +76,7 @@ void StartUpTimeAdjust(void);
 #define IPHONE_SHOW_THESHOLD 383
 #define NO_VELOCITY 0
 
-#define kScreenRectFullScreen   (IPAD() == YES ? CGRectMake(0.f, 0.f, 1024.f, 768.f) : CGRectMake(0.f, 0.f, 480.f, 320.f))
+#define kScreenRectFullScreen   (IPAD() == YES ? CGRectMake(0.f, 0.f, 1024.f, 768.f) : CGRectMake(0.f, 0.f, 568.0f, 320.f))
 #define kScreenRectRealSize     (IPAD() == YES ? CGRectMake((1024/2)-(vMacScreenWidth/2), (768/2)-(vMacScreenHeight/2), vMacScreenWidth, vMacScreenHeight) : CGRectMake(0.f, 0.f, vMacScreenWidth, vMacScreenHeight))
 
 #undef ABS
@@ -86,7 +86,7 @@ void StartUpTimeAdjust(void);
 #define CLAMP(x, lo, hi) (((x) > (hi)) ? (hi) : (((x) < (lo)) ? (lo) : (x)))
 
 #define InsertDiskViewAnimationDuration 0.3
-#define InsertDiskViewFrameHidden           (IPAD() ? CGRectMake(1044.0, 0.0, 240.0, 768.0) : CGRectMake(528, 0.0, 240.0, 320.0))
+#define InsertDiskViewFrameHidden           (IPAD() ? CGRectMake(1044.0, 0.0, 240.0, 768.0) : CGRectMake(578, 0.0, 240.0, 320.0))
 #define InsertDiskViewFrameVisible          (IPAD() ? CGRectMake(1044.0-260.0, 0.0, 240.0, 768.0) : CGRectMake(287, 0.0, 240.0, 320.0))
 
 #define kNavBarHeight 32

@@ -63,6 +63,8 @@ IMPORTFUNC blnr InitEmulation(void);
     if (_romData == nil) {
         [[Helpers sharedInstance] warnMessage:[NSString stringWithFormat:@"Unable to load vMac.ROM from the Documents folder. Please transfer vMac.ROM using iTunes file sharing."]];
         
+        [self suspendEmulation];
+        
         return NO;
     }
     
@@ -115,6 +117,8 @@ IMPORTFUNC blnr InitEmulation(void);
     if (!InitEmulation()) {
         [[Helpers sharedInstance] warnMessage:NSLocalizedString(@"WarnNoEmu", nil)];
         
+        [self suspendEmulation];
+
         return NO;
     }
     

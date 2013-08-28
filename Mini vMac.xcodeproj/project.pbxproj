@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		291DFE0416DEF05000F03EF5 /* VirtualMouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */; };
 		291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */; };
-		291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 291EC69217233F8300D40B90 /* SVProgressHUD.bundle */; };
-		291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 291EC69417233F8300D40B90 /* SVProgressHUD.m */; };
 		29457D5116D923DE00361282 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 29457D5016D923DE00361282 /* PkgInfo */; };
 		295A8A0616E250180061102B /* EmulationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0516E250180061102B /* EmulationManager.m */; };
 		295A8A0A16E253080061102B /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 295A8A0916E253080061102B /* Helpers.m */; };
@@ -18,6 +16,7 @@
 		29D864161720D3CB00528DD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864151720D3CB00528DD9 /* Default@2x.png */; };
 		29D864181720D3D900528DD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864171720D3D900528DD9 /* Default.png */; };
 		29D8641A1720D3DF00528DD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D864191720D3DF00528DD9 /* Default-568h@2x.png */; };
+		29E9A5C517CD864300153328 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E9A5C417CD864300153328 /* MBProgressHUD.m */; };
 		29F56A981733321C006BA1FC /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F56A971733321C006BA1FC /* SSZipArchive.m */; };
 		29F56AA217333293006BA1FC /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 29F56A9A17333293006BA1FC /* ioapi.c */; };
 		29F56AA317333293006BA1FC /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 29F56A9C17333293006BA1FC /* mztools.c */; };
@@ -107,9 +106,6 @@
 		291DFE0316DEF05000F03EF5 /* VirtualMouseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualMouseController.m; sourceTree = "<group>"; };
 		291DFE0516DEF05D00F03EF5 /* VirtualDiskDriveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDriveController.h; sourceTree = "<group>"; };
 		291DFE0616DEF05E00F03EF5 /* VirtualDiskDriveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualDiskDriveController.m; sourceTree = "<group>"; };
-		291EC69217233F8300D40B90 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		291EC69317233F8300D40B90 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		291EC69417233F8300D40B90 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		292FF27C16DB1023001FCFBA /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		292FF27D16DB103A001FCFBA /* VirtualDiskDrive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualDiskDrive.h; sourceTree = "<group>"; };
 		292FF27F16DB108B001FCFBA /* VirtualMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualMouse.h; sourceTree = "<group>"; };
@@ -126,6 +122,8 @@
 		29D864151720D3CB00528DD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		29D864171720D3D900528DD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		29D864191720D3DF00528DD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		29E9A5C317CD864300153328 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		29E9A5C417CD864300153328 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		29F56A961733321C006BA1FC /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		29F56A971733321C006BA1FC /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		29F56A9917333293006BA1FC /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = minizip/crypt.h; sourceTree = "<group>"; };
@@ -290,14 +288,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		291EC69717233F8700D40B90 /* SVProgressHUD */ = {
+		291EC69717233F8700D40B90 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				291EC69217233F8300D40B90 /* SVProgressHUD.bundle */,
-				291EC69317233F8300D40B90 /* SVProgressHUD.h */,
-				291EC69417233F8300D40B90 /* SVProgressHUD.m */,
+				29E9A5C317CD864300153328 /* MBProgressHUD.h */,
+				29E9A5C417CD864300153328 /* MBProgressHUD.m */,
 			);
-			name = SVProgressHUD;
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		292FF27E16DB107E001FCFBA /* Protocols */ = {
@@ -325,7 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				29F56AA7173332A1006BA1FC /* SSZipArchive */,
-				291EC69717233F8700D40B90 /* SVProgressHUD */,
+				291EC69717233F8700D40B90 /* MBProgressHUD */,
 				292FF28316DB1609001FCFBA /* vMac */,
 				292FF28216DB15E3001FCFBA /* Keyboard Craziness */,
 				296C8D7A16D917AE00C79BE8 /* Glue.h */,
@@ -783,7 +780,6 @@
 				29D864161720D3CB00528DD9 /* Default@2x.png in Resources */,
 				29D864181720D3D900528DD9 /* Default.png in Resources */,
 				29D8641A1720D3DF00528DD9 /* Default-568h@2x.png in Resources */,
-				291EC69517233F8300D40B90 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +796,7 @@
 				C1CD3FF0147A5192009C3F2F /* main.m in Sources */,
 				C14B18D3147E74C100A11CFF /* Glue.m in Sources */,
 				C14B18A5147E0A5F00A11CFF /* GLOBGLUE.m in Sources */,
+				29E9A5C517CD864300153328 /* MBProgressHUD.m in Sources */,
 				C14B18A7147E0A5F00A11CFF /* IWMEMDEV.c in Sources */,
 				C14B18A8147E0A5F00A11CFF /* M68KITAB.c in Sources */,
 				C14B18A9147E0A5F00A11CFF /* MINEM68K.c in Sources */,
@@ -824,7 +821,6 @@
 				291DFE0716DEF05E00F03EF5 /* VirtualDiskDriveController.m in Sources */,
 				295A8A0616E250180061102B /* EmulationManager.m in Sources */,
 				295A8A0A16E253080061102B /* Helpers.m in Sources */,
-				291EC69617233F8300D40B90 /* SVProgressHUD.m in Sources */,
 				29F56A981733321C006BA1FC /* SSZipArchive.m in Sources */,
 				29F56AA217333293006BA1FC /* ioapi.c in Sources */,
 				29F56AA317333293006BA1FC /* mztools.c in Sources */,
@@ -943,6 +939,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
@@ -956,11 +953,11 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "minivmac/Mini vMac-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "Mini vMac";
-				PROVISIONING_PROFILE = "049F5647-F950-463D-9CE1-970B5164213F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "049F5647-F950-463D-9CE1-970B5164213F";
+				PROVISIONING_PROFILE = "EDF330D7-ADA5-48F8-8967-D4AD500748B7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EDF330D7-ADA5-48F8-8967-D4AD500748B7";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -971,6 +968,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joshua Barrow (VV74J74MG8)";
@@ -984,11 +982,11 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = NO;
 				INFOPLIST_FILE = "minivmac/Mini vMac-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "Mini vMac";
-				PROVISIONING_PROFILE = "049F5647-F950-463D-9CE1-970B5164213F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "049F5647-F950-463D-9CE1-970B5164213F";
+				PROVISIONING_PROFILE = "EDF330D7-ADA5-48F8-8967-D4AD500748B7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EDF330D7-ADA5-48F8-8967-D4AD500748B7";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

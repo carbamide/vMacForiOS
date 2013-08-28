@@ -14,6 +14,7 @@
         _table = [[UITableView alloc] initWithFrame:tableRect style:UITableViewStylePlain];
         [_table setDelegate:self];
         [_table setDataSource:self];
+        [_table setScrollEnabled:NO];
         
         [self addSubview:_table];
         
@@ -30,6 +31,7 @@
         }
         
         [_navBar pushNavigationItem:navItem animated:NO];
+        [_navBar setBackgroundColor:[UIColor whiteColor]];
         
         [self addSubview:_navBar];
         

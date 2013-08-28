@@ -1,8 +1,8 @@
 #import "AppDelegate.h"
 #import "MainView.h"
 #import "EmulationManager.h"
-#import "SVProgressHUD.h"
 #import "SSZipArchive.h"
+#import "MBProgressHUD.h"
 
 @interface UIWindow (Additions)
 - (void)makeKey:(id)arg1;
@@ -11,6 +11,7 @@
 @end
 
 @interface AppDelegate ()
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
 @end
 
 IMPORTFUNC blnr InitEmulation(void);
@@ -63,30 +64,20 @@ IMPORTFUNC int is_iPad(void);
     [self setInitOk:[[EmulationManager sharedManager] initEmulation]];
     [self initPreferences];
     
-    CGRect windowFrame;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    is_iPad() ? NSLog(@"Yep, it's an iPad") : NSLog(@"Nope, not an iPad");
-    
-    if (IPAD()) {
-        windowFrame = CGRectMake(0, 0, 1024, 768);
-    }
-    else {
-        windowFrame = CGRectMake(0, 0, 480, 320);
-    }
-    
-    [self setWindow:[[UIWindow alloc] initWithFrame:windowFrame]];
+    [self setWindow:[[UIWindow alloc] init]];
     
     if (IPAD()==YES) {
+        [_window setFrame:CGRectMake(0, 0, 1024, 768)];
         [_window setTransform:CGAffineTransformMake(0, -1, 1, 0, -128, 128)];
     }
     else {
-        //this is a flaming pile of dog crap and a stupid way of doing this.
-        //I think probably a curse word would help, so I'm going to curse.
-        //Fuck.
+        [_window setFrame:CGRectMake(0, 0, 568, 320)];
         [_window setTransform:CGAffineTransformMake(0, -1, 1, 0, -80, 120)];
     }
     
-    [self setMainView:[[MainView alloc] initWithFrame:windowFrame]];
+    [self setMainView:[[MainView alloc] initWithFrame:[[self window] bounds]]];
     
     [_window setContentView:_mainView];
     [_window makeKeyAndVisible];
@@ -95,7 +86,12 @@ IMPORTFUNC int is_iPad(void);
         [[EmulationManager sharedManager] startEmulation:self];
     }
     
-    [SVProgressHUD showWithStatus:@"Loading Emulator..." maskType:SVProgressHUDMaskTypeClear];
+    [self setProgressHUD:[MBProgressHUD showHUDAddedTo:[self mainView] animated:YES]];
+    [[self progressHUD] setRemoveFromSuperViewOnHide:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"dismiss_hud" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *aNotification) {
+        [[self progressHUD] hide:YES];
+    }];
     
     return YES;
 }
