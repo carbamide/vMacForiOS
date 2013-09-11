@@ -105,14 +105,6 @@ static UIFont *sharedKeyFont = NULL;
     return self;
 }
 
-- (void)dealloc {
-    int i;
-
-    for (i = 0; i < 4; i++) {
-        if (title[i]) ;
-    }
-}
-
 - (void)setMyTitle:(NSInteger)i {
     if (i < 0 || i > 3) return;
 
